@@ -19,8 +19,10 @@
     </div>
   </div>
 
-  <div v-if="isMobile && isNavDrawerOpen" class="nav-drawer">
-    <Link v-for="link in navItems" :link="link" />
+  <div v-if="isMobile" class="nav-drawer" :style="{ height: contentHeight }">
+    <div ref="content">
+      <Link v-for="link in navItems" :link="link" />
+    </div>
   </div>
 </template>
 
@@ -48,15 +50,25 @@ export default defineComponent({
     ];
 
     const isNavDrawerOpen = ref<boolean>(false);
+    const content = ref<HTMLDivElement>();
+    const contentHeight = ref<string>("0px");
 
     const toggleNavDrawer = (): void => {
       isNavDrawerOpen.value = !isNavDrawerOpen.value;
+
+      if (contentHeight.value) {
+        contentHeight.value = `${
+          isNavDrawerOpen.value ? content.value?.clientHeight : 0
+        }px`;
+      }
     };
 
     return {
       isMobile,
       isNavDrawerOpen,
       navItems,
+      content,
+      contentHeight,
       toggleNavDrawer,
     };
   },
@@ -94,7 +106,12 @@ export default defineComponent({
   }
 
   &-drawer {
+    position: absolute;
     text-align: center;
+    background: $background;
+    width: 100%;
+    overflow: hidden;
+    transition: height 0.2s ease-in-out;
 
     .link {
       padding: 15px;
