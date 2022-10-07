@@ -1,9 +1,6 @@
 <template>
   <div class="nav">
-    <div class="nav-title">
-      <img src="assets/icons/icon.svg" alt="" />
-      <h1>Galacticraft</h1>
-    </div>
+    <div class="spacer" />
 
     <div
       v-if="isMobile"
@@ -30,9 +27,16 @@
 import { defineComponent } from "vue";
 import { isMobile } from "@/composables/mediaQueries";
 import { LinkType } from "@/components/link/types/link.types";
+import { getNavItems } from "@/api/index";
 
 export default defineComponent({
   name: "Nav",
+  props: {
+    hideTitle: {
+      type: Boolean,
+      defualt: true,
+    },
+  },
   setup() {
     const navItems: LinkType[] = [
       {
@@ -48,6 +52,11 @@ export default defineComponent({
         name: "Forum",
       },
     ];
+
+    onMounted(async () => {
+      const test = await getNavItems();
+      console.log(test);
+    });
 
     const isNavDrawerOpen = ref<boolean>(false);
     const content = ref<HTMLDivElement>();

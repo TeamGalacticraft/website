@@ -1,5 +1,6 @@
 @import "variables";
 @import "transitions";
+@import "spacing";
 
 * {
   box-sizing: border-box;
@@ -22,6 +23,145 @@ body {
 
     &:hover {
       color: $primary;
+    }
+  }
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.text {
+  &-left {
+    text-align: left;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.d {
+  &-flex {
+    display: flex;
+  }
+
+  &-block {
+    display: block;
+  }
+
+  &-inline-block {
+    display: inline-block;
+  }
+
+  &-inline {
+    display: inline;
+  }
+
+  &-inline-flex {
+    display: inline-flex;
+  }
+
+  &-none {
+    display: none;
+  }
+}
+
+/* Flex helper classes */
+.flex {
+  display: flex !important;
+
+  &-wrap {
+    flex-wrap: wrap;
+
+    &-reverse {
+      flex-wrap: wrap-reverse;
+    }
+  }
+
+  &-row {
+    flex-flow: row !important;
+
+    &-reverse {
+      flex-flow: row-reverse !important;
+    }
+
+    &-wrap {
+      flex-flow: row wrap;
+    }
+
+    &-no-wrap {
+      flex-flow: row nowrap;
+    }
+  }
+
+  &-col {
+    flex-flow: column !important;
+
+    &-reverse {
+      flex-flow: column-reverse !important;
+    }
+  }
+
+  &-justify {
+    &-center {
+      justify-content: center !important;
+    }
+
+    &-end {
+      justify-content: flex-end !important;
+    }
+
+    &-start {
+      justify-content: flex-start !important;
+    }
+
+    &-between {
+      justify-content: space-between !important;
+    }
+
+    &-evenly {
+      justify-content: space-evenly !important;
+    }
+
+    &-around {
+      justify-content: space-around !important;
+    }
+  }
+
+  &-align {
+    &-center {
+      align-items: center !important;
+    }
+
+    &-end {
+      align-items: flex-end !important;
+    }
+
+    &-start {
+      align-items: flex-start !important;
+    }
+  }
+}
+
+@each $prop, $abbrev in (color: text-, background-color: bg-) {
+  @each $name, $colour in $colours {
+    .#{$abbrev}#{$name} {
+      #{$prop}: #{$colour} !important;
     }
   }
 }
