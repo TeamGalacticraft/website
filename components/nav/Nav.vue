@@ -88,6 +88,9 @@ export default defineComponent({
 @import "@/assets/styles/components/menu-button.scss";
 
 .nav {
+  position: absolute;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;

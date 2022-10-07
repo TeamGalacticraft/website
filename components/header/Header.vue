@@ -10,9 +10,27 @@
         </p>
       </div>
 
-      <div class="header-buttons">
-        <Button class="mb-2">Download</Button>
-        <Button>View changelog</Button>
+      <div class="header-buttons mt-6">
+        <Button
+          class="mb-2"
+          background-colour=""
+          text-colour="primary"
+          border-colour="primary"
+          padding="15px 50px"
+        >
+          <div>
+            <p class="m-0" style="font-size: 18px">DOWNLOAD</p>
+            <p class="m-0 text-secondary" style="font-size: 12px">v1.2.1</p>
+          </div>
+        </Button>
+        <Button
+          background-colour=""
+          text-colour="secondary"
+          border-colour="secondary"
+          padding="5px 20px"
+        >
+          View changelog
+        </Button>
       </div>
     </div>
   </div>
@@ -28,8 +46,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header {
-  background: url("@/assets/header-bg.png");
-  height: 500px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("@/assets/header-bg.png");
+  height: 600px;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
@@ -45,7 +64,7 @@ export default defineComponent({
 
   &-text {
     img {
-      width: 300px;
+      width: 320px;
     }
   }
 }

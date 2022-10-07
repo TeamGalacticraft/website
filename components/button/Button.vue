@@ -1,6 +1,10 @@
 <template>
   <div class="button-container">
-    <button class="button" :class="`text-${textColour} bg-${backgroundColour}`">
+    <button
+      class="button"
+      :class="`text-${textColour} bg-${backgroundColour} border-${borderColour}`"
+      :style="styles"
+    >
       <slot />
     </button>
   </div>
@@ -24,6 +28,25 @@ export default defineComponent({
       type: String,
       default: "10px 20px",
     },
+    fontSize: {
+      type: Number,
+      default: 16,
+    },
+    borderColour: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props) {
+    const styles = computed(() => {
+      return {
+        border: props.borderColour ? "1px solid" : "none",
+      };
+    });
+
+    return {
+      styles,
+    };
   },
 });
 </script>
@@ -31,7 +54,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .button {
   background: none;
-  border: none;
   padding: v-bind(padding);
+  font-size: #{v-bind(fontSize)}px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 </style>

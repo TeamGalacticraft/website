@@ -158,7 +158,9 @@ body {
   }
 }
 
-@each $prop, $abbrev in (color: text-, background-color: bg-) {
+@each $prop,
+  $abbrev in (color: text-, background-color: bg-, border-color: border-)
+{
   @each $name, $colour in $colours {
     .#{$abbrev}#{$name} {
       #{$prop}: #{$colour} !important;
