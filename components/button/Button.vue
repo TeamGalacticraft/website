@@ -36,6 +36,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    fontWeight: {
+      type: Number,
+      default: 600,
+    },
   },
   setup(props) {
     const styles = computed(() => {
@@ -56,7 +60,7 @@ export default defineComponent({
   background: none;
   padding: v-bind(padding);
   font-size: #{v-bind(fontSize)}px;
-  font-weight: 600;
+  font-weight: v-bind(fontWeight);
   cursor: pointer;
 
   &:hover {

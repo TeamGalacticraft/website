@@ -10,7 +10,7 @@
         </p>
       </div>
 
-      <div class="header-buttons mt-6">
+      <div class="header-buttons mt-10">
         <Button
           class="mb-2"
           background-colour=""
@@ -28,6 +28,7 @@
           text-colour="secondary"
           border-colour="secondary"
           padding="5px 20px"
+          :font-weight="500"
         >
           View changelog
         </Button>
