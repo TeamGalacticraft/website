@@ -68,7 +68,7 @@ export default defineComponent({
       const offScreen: boolean =
         innerWidth - activator.value.offsetLeft < content.value.clientWidth;
 
-      position.value.top = `${activator.value.offsetTop + 10}px`;
+      position.value.top = `${activator.value.offsetTop + 20}px`;
 
       position.value.left = `${
         offScreen

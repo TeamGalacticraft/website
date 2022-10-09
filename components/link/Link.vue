@@ -1,6 +1,6 @@
 <template>
   <div class="link">
-    <a v-if="isOutsideLink" :href="link.link">
+    <a v-if="isOutsideLink" target="_blank" :href="link.link">
       {{ link.name }}
     </a>
     <nuxt-link v-else :to="link.link">
