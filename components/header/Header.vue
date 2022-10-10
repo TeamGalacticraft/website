@@ -3,7 +3,7 @@
     <div class="header-content">
       <div class="header-text">
         <img src="@/assets/galactic-graphic.png" alt="" />
-        <p class="text-14 w-85 mx-auto">
+        <p class="w-85 mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
           consectetur quam. Morbi consequat, justo id suscipit ultrices, eros
           ex.
@@ -29,9 +29,9 @@
           background-colour=""
           text-colour="secondary"
           border-colour="secondary"
-          padding="5px 20px"
+          padding="10px 20px"
           :font-weight="500"
-          :font-size="12"
+          :font-size="14"
         >
           View changelog
         </Button>
@@ -70,7 +70,7 @@ export default defineComponent({
 
   &-text {
     img {
-      width: 320px;
+      width: 340px;
     }
   }
 }
