@@ -2,7 +2,9 @@
   <div class="header">
     <div class="header-content">
       <div class="header-text">
-        <img src="@/assets/galactic-graphic.png" alt="" />
+        <transition appear>
+          <img src="@/assets/galactic-graphic.png" alt="" />
+        </transition>
         <p class="w-85 mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
           consectetur quam. Morbi consequat, justo id suscipit ultrices, eros

@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="default">
     <Nav />
     <slot />
+
+    <Loading v-if="loading" />
   </div>
 </template>
 
@@ -9,6 +11,12 @@
 export default defineComponent({
   name: "default",
   setup() {
+    const loading = ref<boolean>(true);
+
+    setTimeout(() => {
+      loading.value = false;
+    }, 800);
+
     onMounted(() => {
       setWidthValues(window.innerWidth);
 
@@ -16,6 +24,10 @@ export default defineComponent({
         setWidthValues(window.innerWidth);
       });
     });
+
+    return {
+      loading,
+    };
   },
 });
 </script>
