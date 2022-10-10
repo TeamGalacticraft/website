@@ -36,6 +36,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    borderWidth: {
+      type: Number,
+      default: 1,
+    },
     fontWeight: {
       type: Number,
       default: 600,
@@ -44,7 +48,7 @@ export default defineComponent({
   setup(props) {
     const styles = computed(() => {
       return {
-        border: props.borderColour ? "1px solid" : "none",
+        border: props.borderColour ? `${props.borderWidth}px solid` : "none",
       };
     });
 

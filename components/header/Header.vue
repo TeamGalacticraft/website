@@ -16,7 +16,8 @@
           background-colour=""
           text-colour="primary"
           border-colour="primary"
-          padding="15px 50px"
+          padding="10px 50px"
+          :border-width="2"
         >
           <div>
             <p class="m-0" style="font-size: 18px">DOWNLOAD</p>
@@ -47,7 +48,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("@/assets/header-bg.png");
   height: 600px;
   background-position: right;
