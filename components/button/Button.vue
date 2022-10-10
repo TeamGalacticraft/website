@@ -2,7 +2,7 @@
   <div class="button-container">
     <button
       class="button"
-      :class="`text-${textColour} bg-${backgroundColour} border-${borderColour}`"
+      :class="`text-${textColour} bg-${backgroundColour} border-${borderColour} text-${fontSize}`"
       :style="styles"
     >
       <slot />
@@ -63,7 +63,6 @@ export default defineComponent({
 .button {
   background: none;
   padding: v-bind(padding);
-  font-size: #{v-bind(fontSize)}px;
   font-weight: v-bind(fontWeight);
   cursor: pointer;
 

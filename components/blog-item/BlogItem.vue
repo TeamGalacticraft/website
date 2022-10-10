@@ -2,15 +2,17 @@
   <div class="blog">
     <div class="d-flex flex-align-center flex-justify-between w-100">
       <div class="blog-title">
-        <h3 class="m-0 text-28 text-ellipsis">{{ blog.title }}</h3>
+        <h3 class="m-0 text-24 text-ellipsis">{{ blog.title }}</h3>
         <p class="m-0 text-primary text-12">{{ formatDate(blog.date) }}</p>
       </div>
 
       <img src="../../assets/rocket.png" alt="" />
     </div>
 
-    <p class="mt-4">{{ blog.desc }}</p>
+    <p class="mt-3 text-12">{{ blog.desc }}</p>
   </div>
+
+  <hr v-if="!lastItem" class="w-90 bg-secondary" style="opacity: 0.2" />
 </template>
 
 <script lang="ts">
@@ -25,6 +27,10 @@ export default defineComponent({
     blog: {
       type: Object as PropType<BlogItem>,
       default: () => ({}),
+    },
+    lastItem: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {
@@ -55,7 +61,7 @@ export default defineComponent({
   // }
 
   img {
-    width: 100px;
+    width: 80px;
     border-radius: 10px;
     border: 1px solid $primary;
     align-self: flex-start;
