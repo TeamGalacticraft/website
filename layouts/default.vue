@@ -1,7 +1,9 @@
 <template>
-  <div class="default">
-    <Nav />
-    <slot />
+  <div>
+    <div v-show="!loading">
+      <Nav />
+      <slot />
+    </div>
 
     <Loading v-if="loading" />
   </div>
