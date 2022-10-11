@@ -3,13 +3,14 @@
     <Header />
 
     <div class="blog mt-8">
-      <h2 class="text-underline ml-4">Latest blogs</h2>
-      <div>
-        <BlogItem
-          v-for="(blog, i) in mockBlogs"
-          :last-item="i + 1 === mockBlogs.length"
-          :blog="blog"
-        />
+      <h2 class="blog-header text-underline ml-4">Latest blogs</h2>
+      <div
+        v-for="(blog, i) in mockBlogs"
+        class="blog-item"
+        :class="`blog-item-${i}`"
+        :data-trigger-id="`blog-item-${i}`"
+      >
+        <BlogItem :last-item="i + 1 === mockBlogs.length" :blog="blog" />
       </div>
     </div>
   </div>
@@ -55,9 +56,20 @@ export default defineComponent({
     ];
 
     const setGSAP = (): void => {
-      gsap.to(".blog", {
-        scrollTrigger: ".blog",
-        x: 0,
+      gsap.to(".blog-header", { opacity: 1, x: 0, duration: 1.5 });
+
+      const blogItems = document.querySelectorAll(".blog-item");
+
+      blogItems.forEach((item, index) => {
+        gsap.to(item, {
+          scrollTrigger: {
+            trigger: `.${item.attributes["data-trigger-id"].value}`,
+            start: "top bottom-=200px",
+          },
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+        });
       });
     };
 
@@ -70,4 +82,16 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.blog {
+  &-item {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+
+  &-header {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+}
+</style>

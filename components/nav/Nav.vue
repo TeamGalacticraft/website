@@ -9,7 +9,12 @@
           :class="{ 'menu-btn__open': isNavDrawerOpen }"
           @click="toggleNavDrawer"
         >
-          <span v-for="i in 4" :key="i" />
+          <span
+            :class="`menu-item menu-item-${i}`"
+            :data-trigger-id="`menu-item-${i}`"
+            v-for="i in 4"
+            :key="i"
+          />
         </div>
       </template>
 
@@ -28,6 +33,7 @@
 import { defineComponent } from "vue";
 import { isMobile } from "@/composables/mediaQueries";
 import { LinkType } from "@/components/link/types/link.types";
+import { gsap } from "gsap";
 
 export default defineComponent({
   name: "Nav",
@@ -59,11 +65,25 @@ export default defineComponent({
       isNavDrawerOpen.value = !isNavDrawerOpen.value;
     };
 
+    onMounted(() => {
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach((item, index) => {
+        if (!isNavDrawerOpen.value && index !== 2) {
+          gsap.to(item, {
+            y: 0,
+            opacity: 1,
+            duration: .5,
+            delay: index * 0.1,
+          });
+        }
+      });
+    });
+
     return {
       isMobile,
       isNavDrawerOpen,
       navItems,
-
       toggleNavDrawer,
     };
   },
@@ -81,6 +101,11 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   padding: 30px;
+
+  .menu-item {
+    transform: translateY(20px);
+    opacity: 0;
+  }
 
   &-title {
     display: flex;

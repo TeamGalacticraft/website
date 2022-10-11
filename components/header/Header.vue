@@ -3,9 +3,13 @@
     <div class="header-content">
       <div class="header-text">
         <transition appear>
-          <img src="@/assets/galactic-graphic.png" alt="" />
+          <img
+            class="header-text__img"
+            src="@/assets/galactic-graphic.png"
+            alt=""
+          />
         </transition>
-        <p class="w-85 text-14 my-6 mx-auto">
+        <p class="header-text__p w-85 text-14 my-6 mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
           consectetur quam. Morbi consequat, justo id suscipit ultrices.
         </p>
@@ -27,6 +31,7 @@
           </div>
         </Button>
         <Button
+          class="header-button__changelog"
           background-colour=""
           text-colour="secondary"
           border-colour="secondary"
@@ -44,10 +49,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { isMobile } from "@/composables/mediaQueries";
+import { gsap } from "gsap";
 
 export default defineComponent({
   name: "Header",
   setup() {
+    onMounted(() => {
+      gsap.to(".header-text__img", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".header-text__p", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".header-button__changelog", { opacity: 1, y: 0, duration: 1.5 });
+    });
+
     return {
       isMobile,
     };
@@ -69,7 +81,24 @@ export default defineComponent({
   align-items: center;
   text-align: center;
 
+  &-button {
+    &__changelog {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
   &-text {
+    &__img {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    &__p {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
     img {
       width: 340px;
     }

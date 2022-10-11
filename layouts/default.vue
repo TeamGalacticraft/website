@@ -14,11 +14,11 @@
 export default defineComponent({
   name: "default",
   setup() {
-    const loading = ref<boolean>(true);
+    const loading = ref<boolean>(false);
 
-    setTimeout(() => {
-      loading.value = false;
-    }, 500);
+    // setTimeout(() => {
+    //   loading.value = false;
+    // }, 500);
 
     onMounted(() => {
       setWidthValues(window.innerWidth);
