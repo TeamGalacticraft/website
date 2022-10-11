@@ -2,7 +2,8 @@
   <div>
     <Header />
 
-    <div class="mt-4">
+    <div class="mt-8">
+      <h2 class="text-underline ml-2">Latest blogs</h2>
       <BlogItem
         v-for="(blog, i) in mockBlogs"
         :last-item="i + 1 === mockBlogs.length"

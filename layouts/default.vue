@@ -3,6 +3,7 @@
     <div v-show="!loading">
       <Nav />
       <slot />
+      <Footer />
     </div>
 
     <Loading v-if="loading" />
@@ -17,7 +18,7 @@ export default defineComponent({
 
     setTimeout(() => {
       loading.value = false;
-    }, 800);
+    }, 500);
 
     onMounted(() => {
       setWidthValues(window.innerWidth);

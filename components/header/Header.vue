@@ -60,7 +60,7 @@ export default defineComponent({
 .header {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("@/assets/header-bg.png");
-  height: 500px;
+  height: 550px;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;

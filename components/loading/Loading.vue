@@ -87,7 +87,7 @@ export default defineComponent({
     background-size: 100px 100px;
     box-shadow: 4px 4px 12px 0px rgba(255, 61, 0, 0.5);
     box-sizing: border-box;
-    animation: animloader 1s linear infinite alternate;
+    animation: animloader 3s linear infinite alternate;
   }
 }
 
@@ -132,7 +132,7 @@ export default defineComponent({
     border-radius: 0 4px 4px 0;
     top: 0;
     left: 0;
-    animation: animFw 1.2s ease-in infinite;
+    animation: animFw 2s ease-in infinite;
   }
 }
 
