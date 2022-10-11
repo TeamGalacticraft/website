@@ -78,7 +78,8 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      setTimeout(setPositioning, 200);
+      // Needed as not shown whilst loading page
+      setTimeout(setPositioning, 1000);
     });
 
     return {
