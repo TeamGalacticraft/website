@@ -9,7 +9,7 @@
       <img src="../../assets/rocket.png" alt="" />
     </div>
 
-    <p class="mt-3 text-12">{{ blog.desc }}</p>
+    <p class="mt-5 text-12">{{ blog.desc }}</p>
   </div>
 
   <hr v-if="!lastItem" class="w-90 bg-secondary" style="opacity: 0.2" />
@@ -49,7 +49,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .blog {
-  padding: 15px;
+  padding: 30px 20px;
   display: flex;
   flex-wrap: wrap;
   cursor: pointer;

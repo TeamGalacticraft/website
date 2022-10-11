@@ -3,7 +3,7 @@
     <Header />
 
     <div class="mt-8">
-      <h2 class="text-underline ml-2">Latest blogs</h2>
+      <h2 class="text-underline ml-4">Latest blogs</h2>
       <BlogItem
         v-for="(blog, i) in mockBlogs"
         :last-item="i + 1 === mockBlogs.length"
@@ -25,25 +25,25 @@ export default defineComponent({
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       },
       {
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       },
       {
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       },
       {
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
       },
     ];
 

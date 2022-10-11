@@ -5,14 +5,13 @@
         <transition appear>
           <img src="@/assets/galactic-graphic.png" alt="" />
         </transition>
-        <p class="w-85 mx-auto">
+        <p class="w-85 text-14 my-6 mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
-          consectetur quam. Morbi consequat, justo id suscipit ultrices, eros
-          ex.
+          consectetur quam. Morbi consequat, justo id suscipit ultrices.
         </p>
       </div>
 
-      <div class="header-buttons mt-6">
+      <div class="header-buttons mt-10">
         <Button
           v-if="!isMobile"
           class="mb-1"
