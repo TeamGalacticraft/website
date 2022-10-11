@@ -103,7 +103,7 @@ export default defineComponent({
   padding: 30px;
 
   .menu-item {
-    transform: translateY(20px);
+    transform: translateY(40px);
     opacity: 0;
   }
 

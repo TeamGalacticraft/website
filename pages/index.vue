@@ -56,7 +56,7 @@ export default defineComponent({
     ];
 
     const setGSAP = (): void => {
-      gsap.to(".blog-header", { opacity: 1, x: 0, duration: 1.5 });
+      gsap.to(".blog-header", { opacity: 1, x: 0, duration: 1 });
 
       const blogItems = document.querySelectorAll(".blog-item");
 
@@ -68,7 +68,7 @@ export default defineComponent({
           },
           x: 0,
           opacity: 1,
-          duration: 1.5,
+          duration: .5,
         });
       });
     };
