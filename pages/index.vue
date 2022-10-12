@@ -68,7 +68,7 @@ export default defineComponent({
           },
           x: 0,
           opacity: 1,
-          duration: .5,
+          duration: 0.5,
         });
       });
     };
@@ -84,6 +84,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .blog {
+  max-width: 700px;
+  margin: 0 auto;
+
   &-item {
     transform: translateX(-200px);
     opacity: 0;

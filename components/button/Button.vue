@@ -44,11 +44,16 @@ export default defineComponent({
       type: Number,
       default: 600,
     },
+    width: {
+      type: Number,
+      default: undefined,
+    },
   },
   setup(props) {
     const styles = computed(() => {
       return {
         border: props.borderColour ? `${props.borderWidth}px solid` : "none",
+        width: props.width ? `${props.width}px` : undefined,
       };
     });
 

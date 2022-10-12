@@ -1,18 +1,20 @@
 <template>
   <div class="blog">
-    <div class="d-flex flex-align-center flex-justify-between w-100">
-      <div class="blog-title">
-        <h3 class="m-0 text-24 text-ellipsis">{{ blog.title }}</h3>
-        <p class="m-0 text-primary text-12">{{ formatDate(blog.date) }}</p>
+    <div class="blog-container">
+      <div class="d-flex flex-align-center flex-justify-between w-100">
+        <div class="blog-title">
+          <h3 class="m-0 text-24 text-ellipsis">{{ blog.title }}</h3>
+          <p class="m-0 text-primary text-12">{{ formatDate(blog.date) }}</p>
+        </div>
+
+        <img src="../../assets/rocket.png" alt="" />
       </div>
 
-      <img src="../../assets/rocket.png" alt="" />
+      <p class="mt-5 text-12">{{ blog.desc }}</p>
     </div>
 
-    <p class="mt-5 text-12">{{ blog.desc }}</p>
+    <hr v-if="!lastItem" class="w-90 bg-secondary" style="opacity: 0.2" />
   </div>
-
-  <hr v-if="!lastItem" class="w-90 bg-secondary" style="opacity: 0.2" />
 </template>
 
 <script lang="ts">
@@ -49,10 +51,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .blog {
-  padding: 30px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  cursor: pointer;
+  &-container {
+    padding: 30px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+  }
 
   // &-title {
   //   display: flex;

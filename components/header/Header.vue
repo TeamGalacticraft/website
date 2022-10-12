@@ -9,24 +9,28 @@
             alt=""
           />
         </transition>
-        <p class="header-text__p w-85 text-14 my-6 mx-auto">
+        <p
+          class="header-text__p w-85 text-14"
+          :class="{ 'my-6 mx-auto': isMobile }"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
           consectetur quam. Morbi consequat, justo id suscipit ultrices.
         </p>
       </div>
 
-      <div class="header-buttons mt-10">
+      <div class="header-buttons" :class="{ 'mt-10': isMobile }">
         <Button
           v-if="!isMobile"
           class="mb-1"
           background-colour=""
           text-colour="primary"
           border-colour="primary"
-          padding="7px 50px"
+          padding="15px"
           :border-width="2"
+          :width="250"
         >
           <div>
-            <p class="m-0">DOWNLOAD</p>
+            <p class="m-0 text-18">DOWNLOAD</p>
             <p class="m-0 text-secondary text-10">v1.2.1</p>
           </div>
         </Button>
@@ -35,9 +39,10 @@
           background-colour=""
           text-colour="secondary"
           border-colour="secondary"
-          padding="10px 20px"
+          padding="10px"
           :font-weight="500"
           :font-size="14"
+          :width="250"
         >
           View changelog
         </Button>
@@ -89,6 +94,9 @@ export default defineComponent({
   }
 
   &-text {
+    max-width: 500px;
+    margin: 0 auto;
+
     &__img {
       opacity: 0;
       transform: translateY(-50px);
@@ -101,6 +109,26 @@ export default defineComponent({
 
     img {
       width: 340px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &-content {
+      display: flex;
+      align-items: center;
+      max-width: 700px;
+    }
+
+    &-text {
+      text-align: left;
+
+      p {
+        margin-top: 20px;
+      }
+    }
+
+    img {
+      width: 350px;
     }
   }
 }
