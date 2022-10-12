@@ -73,7 +73,7 @@ export default defineComponent({
           gsap.to(item, {
             y: 0,
             opacity: 1,
-            duration: .5,
+            duration: 0.5,
             delay: index * 0.1,
           });
         }
@@ -131,8 +131,10 @@ export default defineComponent({
   .link {
     padding: 15px;
 
-    &:hover {
-      background: lighten($background, 5%);
+    @media (max-width: 767px) {
+      &:hover {
+        background: lighten($background, 5%);
+      }
     }
   }
 }

@@ -33,19 +33,19 @@ export default defineComponent({
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum urna magna, vulputate ut turpis in, placerat efficitur turpis. Aenean elementum arcu metus, non euismod nulla porta ac. Suspendisse potenti. Sed a fermentum nunc. Morbi non magna ullamcorper, consequat mi eu, congue justo. In iaculis aliquam nulla eget pharetra. Vestibulum non porttitor ipsum, id sollicitudin elit. Maecenas eleifend est nec odio malesuada.",
       },
       {
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum urna magna, vulputate ut turpis in, placerat efficitur turpis. Aenean elementum arcu metus, non euismod nulla porta ac. Suspendisse potenti. Sed a fermentum nunc. Morbi non magna ullamcorper, consequat mi eu, congue justo. In iaculis aliquam nulla eget pharetra. Vestibulum non porttitor ipsum, id sollicitudin elit. Maecenas eleifend est nec odio malesuada.",
       },
       {
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum urna magna, vulputate ut turpis in, placerat efficitur turpis. Aenean elementum arcu metus, non euismod nulla porta ac. Suspendisse potenti. Sed a fermentum nunc. Morbi non magna ullamcorper, consequat mi eu, congue justo. In iaculis aliquam nulla eget pharetra. Vestibulum non porttitor ipsum, id sollicitudin elit. Maecenas eleifend est nec odio malesuada.",
       },
       {
         title: "Galacticraft 5",
@@ -64,7 +64,7 @@ export default defineComponent({
         gsap.to(item, {
           scrollTrigger: {
             trigger: `.${item.attributes["data-trigger-id"].value}`,
-            start: "top bottom-=200px",
+            start: "top bottom-=150px",
           },
           x: 0,
           opacity: 1,

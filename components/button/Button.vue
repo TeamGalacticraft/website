@@ -1,13 +1,11 @@
 <template>
-  <div class="button-container">
-    <button
-      class="button"
-      :class="`text-${textColour} bg-${backgroundColour} border-${borderColour} text-${fontSize}`"
-      :style="styles"
-    >
-      <slot />
-    </button>
-  </div>
+  <button
+    class="button"
+    :class="`text-${textColour} bg-${backgroundColour} border-${borderColour} text-${fontSize}`"
+    :style="styles"
+  >
+    <slot />
+  </button>
 </template>
 
 <script lang="ts">
@@ -48,12 +46,17 @@ export default defineComponent({
       type: Number,
       default: undefined,
     },
+    height: {
+      type: Number,
+      default: undefined,
+    },
   },
   setup(props) {
     const styles = computed(() => {
       return {
         border: props.borderColour ? `${props.borderWidth}px solid` : "none",
-        width: props.width ? `${props.width}px` : undefined,
+        width: props.width ? `${props.width}px` : "max-content",
+        height: props.height ? `${props.height}px` : undefined,
       };
     });
 
@@ -66,10 +69,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background: none;
   padding: v-bind(padding);
   font-weight: v-bind(fontWeight);
   cursor: pointer;
+  border-radius: 3px;
 
   &:hover {
     opacity: 0.7;

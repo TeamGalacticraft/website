@@ -9,40 +9,36 @@
             alt=""
           />
         </transition>
-        <p
-          class="header-text__p w-85 text-14"
-          :class="{ 'my-6 mx-auto': isMobile }"
-        >
+        <p class="header-text__p text-14" :class="{ 'my-6 w-85 mx-auto': isMobile }">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
-          consectetur quam. Morbi consequat, justo id suscipit ultrices.
+          consectetur quam. Morbi consequat, justo id suscipit ultrices, eros ex
+          dictum purus, eu semper est metus lacinia tortor. In in leo nunc.
         </p>
       </div>
 
-      <div class="header-buttons" :class="{ 'mt-10': isMobile }">
+      <div
+        class="header-buttons"
+        :class="{ 'mt-10': isMobile, 'mt-6': isTablet }"
+      >
         <Button
           v-if="!isMobile"
-          class="mb-1"
+          class="mr-2 header-button__download"
           background-colour=""
           text-colour="primary"
           border-colour="primary"
-          padding="15px"
           :border-width="2"
-          :width="250"
+          :width="200"
+          :height="50"
         >
-          <div>
-            <p class="m-0 text-18">DOWNLOAD</p>
-            <p class="m-0 text-secondary text-10">v1.2.1</p>
-          </div>
+          DOWNLOAD
         </Button>
         <Button
           class="header-button__changelog"
           background-colour=""
           text-colour="secondary"
           border-colour="secondary"
-          padding="10px"
-          :font-weight="500"
-          :font-size="14"
-          :width="250"
+          :width="200"
+          :height="50"
         >
           View changelog
         </Button>
@@ -53,7 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { isMobile } from "@/composables/mediaQueries";
+import { isMobile, isTablet } from "@/composables/mediaQueries";
 import { gsap } from "gsap";
 
 export default defineComponent({
@@ -63,10 +59,12 @@ export default defineComponent({
       gsap.to(".header-text__img", { opacity: 1, y: 0, duration: 1.5 });
       gsap.to(".header-text__p", { opacity: 1, y: 0, duration: 1.5 });
       gsap.to(".header-button__changelog", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".header-button__download", { opacity: 1, y: 0, duration: 1.5 });
     });
 
     return {
       isMobile,
+      isTablet,
     };
   },
 });
@@ -76,7 +74,7 @@ export default defineComponent({
 .header {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("@/assets/header-bg.png");
-  height: 550px;
+  height: 600px;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
@@ -86,11 +84,15 @@ export default defineComponent({
   align-items: center;
   text-align: center;
 
-  &-button {
-    &__changelog {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+  &-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-button__download,
+  &-button__changelog {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
   &-text {
@@ -115,20 +117,14 @@ export default defineComponent({
   @media (min-width: 768px) {
     &-content {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
       max-width: 700px;
     }
 
-    &-text {
-      text-align: left;
-
-      p {
-        margin-top: 20px;
-      }
-    }
-
     img {
-      width: 350px;
+      width: 400px;
     }
   }
 }

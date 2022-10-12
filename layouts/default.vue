@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-show="!loading">
+    <div v-if="!loading">
       <Nav />
       <slot />
       <Footer />
@@ -14,11 +14,11 @@
 export default defineComponent({
   name: "default",
   setup() {
-    const loading = ref<boolean>(false);
+    const loading = ref<boolean>(true);
 
-    // setTimeout(() => {
-    //   loading.value = false;
-    // }, 500);
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
 
     onMounted(() => {
       setWidthValues(window.innerWidth);
