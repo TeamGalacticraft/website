@@ -9,7 +9,10 @@
             alt=""
           />
         </transition>
-        <p class="header-text__p text-14" :class="{ 'my-6 w-85 mx-auto': isMobile }">
+        <p
+          class="header-text__p text-14"
+          :class="{ 'my-6 w-85 mx-auto': isMobile }"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
           consectetur quam. Morbi consequat, justo id suscipit ultrices, eros ex
           dictum purus, eu semper est metus lacinia tortor. In in leo nunc.
@@ -55,11 +58,26 @@ import { gsap } from "gsap";
 export default defineComponent({
   name: "Header",
   setup() {
-    onMounted(() => {
+    const setGSAP = (): void => {
       gsap.to(".header-text__img", { opacity: 1, y: 0, duration: 1.5 });
       gsap.to(".header-text__p", { opacity: 1, y: 0, duration: 1.5 });
-      gsap.to(".header-button__changelog", { opacity: 1, y: 0, duration: 1.5 });
-      gsap.to(".header-button__download", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".header-button__changelog", {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+      });
+
+      if (!isMobile.value) {
+        gsap.to(".header-button__download", {
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+        });
+      }
+    };
+
+    watch(isMobile, () => setTimeout(setGSAP, 50), {
+      immediate: true,
     });
 
     return {

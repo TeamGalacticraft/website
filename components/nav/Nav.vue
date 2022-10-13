@@ -46,15 +46,19 @@ export default defineComponent({
   setup() {
     const navItems: LinkType[] = [
       {
+        link: "/",
+        name: "Home",
+      },
+      {
         link: "/news",
         name: "News",
       },
       {
-        link: "https://discord.com",
+        link: "https://discord.com/invite/n3QqhMYyFK",
         name: "Discord",
       },
       {
-        link: "https://forum.com",
+        link: "https://forum.micdoodle8.com/index.php",
         name: "Forum",
       },
     ];
@@ -65,20 +69,26 @@ export default defineComponent({
       isNavDrawerOpen.value = !isNavDrawerOpen.value;
     };
 
-    onMounted(() => {
-      const menuItems = document.querySelectorAll(".menu-item");
+    const setGSAP = (): void => {
+      if (isMobile.value) {
+        const menuItems = document.querySelectorAll(".menu-item");
 
-      menuItems.forEach((item, index) => {
-        if (!isNavDrawerOpen.value && index !== 2) {
-          gsap.to(item, {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            delay: index * 0.1,
-          });
-        }
-      });
-    });
+        menuItems.forEach((item, index) => {
+          if (!isNavDrawerOpen.value && index !== 2) {
+            gsap.to(item, {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              delay: index * 0.1,
+            });
+          }
+        });
+      } else {
+        gsap.to(".nav-links", { opacity: 1, x: 0, duration: 1.5 });
+      }
+    };
+
+    watch(isMobile, () => setTimeout(setGSAP, 50), { immediate: true });
 
     return {
       isMobile,
@@ -125,7 +135,10 @@ export default defineComponent({
 
   &-links {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+
+    opacity: 0;
+    transform: translateX(40px);
   }
 
   .link {

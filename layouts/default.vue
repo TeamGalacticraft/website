@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div v-if="!loading">
+    <div v-if="!loading" :key="route.path">
       <Nav />
       <slot />
-      <Footer />
+      <!-- <Footer /> -->
     </div>
 
     <Loading v-if="loading" />
@@ -14,6 +14,7 @@
 export default defineComponent({
   name: "default",
   setup() {
+    const route = useRoute();
     const loading = ref<boolean>(true);
 
     setTimeout(() => {
@@ -29,6 +30,7 @@ export default defineComponent({
     });
 
     return {
+      route,
       loading,
     };
   },
