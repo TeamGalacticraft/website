@@ -7,5 +7,3 @@ export default defineComponent({
   name: "Changelog",
 });
 </script>
-
-<style lang="scss" scoped></style>

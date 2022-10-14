@@ -50,10 +50,6 @@ export default defineComponent({
         name: "Home",
       },
       {
-        link: "/news",
-        name: "News",
-      },
-      {
         link: "https://discord.com/invite/n3QqhMYyFK",
         name: "Discord",
       },

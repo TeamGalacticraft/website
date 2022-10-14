@@ -22,7 +22,8 @@ export default defineNuxtConfig({
       {
         hid: "description",
         name: "description",
-        content: "",
+        content:
+          "Galacticraft is all about exploring other planets, moons and asteroids! Each planet, moon and asteroid belt is a dimension in the game. The same goes for space stations.",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
