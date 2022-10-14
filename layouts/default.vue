@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <div v-if="!loading" :key="route.path">
-      <Nav />
-      <slot />
-      <!-- <Footer /> -->
-    </div>
+    <template v-if="!loading">
+      <main>
+        <Nav />
+        <!-- Reset page to activate transitions -->
+        <div :key="route.path">
+          <slot />
+        </div>
+      </main>
 
-    <Loading v-if="loading" />
+      <Footer />
+    </template>
+
+    <Loading v-else />
   </div>
 </template>
 
@@ -36,3 +42,21 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+#app {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr;
+  grid-template-areas: "main" "footer";
+  grid-template-rows: 1fr 80px;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+</style>

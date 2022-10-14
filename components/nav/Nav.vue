@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <nav class="nav">
     <div class="spacer" />
 
     <Menu v-if="isMobile" v-model="isNavDrawerOpen">
@@ -26,7 +26,7 @@
     <div v-else class="nav-links">
       <Link v-for="link in navItems" :link="link" />
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">

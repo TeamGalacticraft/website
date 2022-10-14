@@ -1,7 +1,7 @@
 <template>
-  <div class="footer mt-6 py-4 text-center">
+  <footer class="footer py-4 text-center">
     <p class="text-12">&copy; 2022 Galacticraft. All rights reserved.</p>
-  </div>
+  </footer>
 </template>
 
 <script lang="ts">
