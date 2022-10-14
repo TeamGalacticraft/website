@@ -117,7 +117,7 @@ export default defineComponent({
     position: absolute;
     color: $secondary;
     background-color: $background;
-    z-index: 50;
+    z-index: 99;
     border-radius: 5px;
     padding: 10px;
 

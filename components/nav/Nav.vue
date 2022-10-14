@@ -111,6 +111,7 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   padding: 30px;
+  z-index: 99;
 
   .menu-item {
     transform: translateY(40px);
