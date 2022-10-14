@@ -35,16 +35,18 @@
         >
           DOWNLOAD
         </Button>
-        <Button
-          class="header-button__changelog"
-          background-colour=""
-          text-colour="secondary"
-          border-colour="secondary"
-          :width="200"
-          :height="50"
-        >
-          View changelog
-        </Button>
+        <nuxt-link to="/changelog">
+          <Button
+            class="header-button__changelog"
+            background-colour=""
+            text-colour="secondary"
+            border-colour="secondary"
+            :width="200"
+            :height="50"
+          >
+            View changelog
+          </Button>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -143,6 +145,24 @@ export default defineComponent({
 
     img {
       width: 400px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    &-content {
+      max-width: 900px;
+    }
+
+    &-buttons {
+      margin-top: 50px;
+    }
+
+    &-text {
+      max-width: 650px;
+    }
+
+    img {
+      width: 450px;
     }
   }
 }

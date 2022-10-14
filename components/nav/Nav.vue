@@ -40,7 +40,7 @@ export default defineComponent({
   props: {
     hideTitle: {
       type: Boolean,
-      defualt: true,
+      default: true,
     },
   },
   setup() {
@@ -136,16 +136,20 @@ export default defineComponent({
 
   &-links {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 
     opacity: 0;
     transform: translateX(40px);
+
+    @media (min-width: 768px) {
+      margin-right: 10%;
+    }
   }
 
-  .link {
-    padding: 15px;
+  @media (max-width: 767px) {
+    .link {
+      padding: 15px;
 
-    @media (max-width: 767px) {
       &:hover {
         background: lighten($background, 5%);
       }

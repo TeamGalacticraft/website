@@ -51,7 +51,7 @@ export default defineComponent({
         title: "Galacticraft 5",
         date: "2022-10-10",
         image: "rocket.png",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum urna magna, vulputate ut turpis in, placerat efficitur turpis. Aenean elementum arcu metus, non euismod nulla porta ac. Suspendisse potenti. Sed a fermentum nunc. Morbi non magna ullamcorper, consequat mi eu, congue justo. In iaculis aliquam nulla eget pharetra. Vestibulum non porttitor ipsum, id sollicitudin elit. Maecenas eleifend est nec odio malesuada.",
       },
     ];
 
@@ -95,6 +95,10 @@ export default defineComponent({
   &-header {
     transform: translateX(-200px);
     opacity: 0;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 800px;
   }
 }
 </style>

@@ -11,7 +11,12 @@
           <img v-if="isMobile" src="../../assets/rocket.png" alt="" />
         </div>
 
-        <p class="mt-5 text-12 text-multiline-ellipsis">{{ blog.desc }}</p>
+        <p
+          class="text-12 text-multiline-ellipsis"
+          :class="isMobile ? 'mt-2' : 'mt-5'"
+        >
+          {{ blog.desc }}
+        </p>
       </div>
 
       <img v-if="!isMobile" src="../../assets/rocket.png" alt="" />
@@ -69,12 +74,6 @@ export default defineComponent({
     overflow: hidden;
   }
 
-  // &-title {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  // }
-
   img {
     width: 80px;
     border-radius: 10px;
@@ -86,6 +85,15 @@ export default defineComponent({
     &-container {
       display: grid;
       grid-template-columns: 1fr 150px;
+      grid-gap: 40px;
+      align-items: center;
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
     }
 
     img {

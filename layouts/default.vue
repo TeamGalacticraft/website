@@ -46,7 +46,7 @@ export default defineComponent({
 <style lang="scss">
 #app {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 50px;
   grid-template-columns: 1fr;
   grid-template-areas: "main" "footer";
   grid-template-rows: 1fr 80px;
