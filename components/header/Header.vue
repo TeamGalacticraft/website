@@ -21,7 +21,7 @@
 
       <div
         class="header-buttons"
-        :class="{ 'mt-10': isMobile, 'mt-6': isTablet }"
+        :class="{ 'mt-10': isMobile, 'mt-6': !isMobile }"
       >
         <Button
           v-if="!isMobile"
@@ -98,6 +98,7 @@ export default defineComponent({
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
+  border-bottom: 2px solid $secondary;
 
   display: flex;
   justify-content: center;

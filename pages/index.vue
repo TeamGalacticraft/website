@@ -3,7 +3,6 @@
     <Header />
 
     <div class="blog mt-8">
-      <h2 class="blog-header text-underline ml-4">Latest blogs</h2>
       <div
         v-for="(blog, i) in mockBlogs"
         class="blog-item"
@@ -56,8 +55,6 @@ export default defineComponent({
     ];
 
     const setGSAP = (): void => {
-      gsap.to(".blog-header", { opacity: 1, x: 0, duration: 1 });
-
       const blogItems = document.querySelectorAll(".blog-item");
 
       blogItems.forEach((item, index) => {
@@ -88,11 +85,6 @@ export default defineComponent({
   margin: 0 auto;
 
   &-item {
-    transform: translateX(-200px);
-    opacity: 0;
-  }
-
-  &-header {
     transform: translateX(-200px);
     opacity: 0;
   }

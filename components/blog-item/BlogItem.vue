@@ -2,7 +2,7 @@
   <div class="blog">
     <div class="blog-container">
       <div>
-        <div class="d-flex flex-align-center flex-justify-between w-100">
+        <div class="blog-title-container w-100">
           <div class="blog-title">
             <h3 class="m-0 text-24 text-ellipsis">{{ blog.title }}</h3>
             <p class="m-0 text-primary text-12">{{ formatDate(blog.date) }}</p>
@@ -67,6 +67,29 @@ export default defineComponent({
     cursor: pointer;
   }
 
+  .blog-title-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &-item {
+    &:nth-child(even) {
+      .blog-title-container {
+        justify-content: space-between;
+      }
+    }
+
+    &:nth-child(odd) {
+      .blog-title {
+        margin-left: 20px;
+      }
+
+      img {
+        order: -1 !important;
+      }
+    }
+  }
+
   p {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -84,9 +107,23 @@ export default defineComponent({
   @media (min-width: 768px) {
     &-container {
       display: grid;
-      grid-template-columns: 1fr 150px;
       grid-gap: 40px;
       align-items: center;
+      padding: 50px 20px;
+    }
+
+    &-item {
+      &:nth-child(odd) {
+        .blog-container {
+          grid-template-columns: 150px 1fr;
+        }
+      }
+
+      &:nth-child(even) {
+        .blog-container {
+          grid-template-columns: 1fr 150px;
+        }
+      }
     }
 
     &-title {

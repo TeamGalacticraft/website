@@ -22,7 +22,7 @@ export default defineComponent({
         },
         y: 0,
         opacity: 1,
-        duration: 1,
+        duration: 0.5,
       });
     });
   },
@@ -33,6 +33,6 @@ export default defineComponent({
 .footer {
   background: rgb(2, 10, 15);
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(30px);
 }
 </style>
