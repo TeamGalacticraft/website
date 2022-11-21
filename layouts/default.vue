@@ -1,5 +1,5 @@
 <template>
-  <div id="default">
+  <v-layout id="default">
     <template v-if="!loading">
       <main>
         <Nav />
@@ -13,7 +13,7 @@
     </template>
 
     <Loading v-else />
-  </div>
+  </v-layout>
 </template>
 
 <script lang="ts">

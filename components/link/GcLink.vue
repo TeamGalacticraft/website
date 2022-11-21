@@ -1,5 +1,5 @@
 <template>
-  <div class="link">
+  <div class="gc-link">
     <a v-if="isOutsideLink" target="_blank" :href="link.link">
       {{ link.name }}
     </a>
@@ -14,7 +14,7 @@ import { defineComponent, PropType } from "vue";
 import { LinkType } from "./types/link.types";
 
 export default defineComponent({
-  name: "Link",
+  name: "GcLink",
   props: {
     link: {
       type: Object as PropType<LinkType>,

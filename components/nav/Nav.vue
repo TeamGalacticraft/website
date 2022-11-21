@@ -1,32 +1,29 @@
 <template>
-  <nav class="nav">
-    <div class="spacer" />
+  <template v-if="isMobile">
+    <v-navigation-drawer
+      class="bg-background"
+      location="end"
+      v-model="isNavDrawerOpen"
+    >
+      <v-list class="px-0 mt-8" nav>
+        <v-list-item class="px-0" v-for="link in navItems">
+          <gc-link class="pl-6" :link="link" @click="toggleNavDrawer" />
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-    <Menu v-if="isMobile" v-model="isNavDrawerOpen">
-      <template #activator>
-        <div
-          class="menu-btn"
-          :class="{ 'menu-btn__open': isNavDrawerOpen }"
-          @click="toggleNavDrawer"
-        >
-          <span
-            :class="`menu-item menu-item-${i}`"
-            :data-trigger-id="`menu-item-${i}`"
-            v-for="i in 4"
-            :key="i"
-          />
-        </div>
-      </template>
+    <v-app-bar class="nav px-4" flat>
+      <v-spacer />
 
-      <div>
-        <Link v-for="link in navItems" :link="link" />
+      <div class="menu-btn" @click="toggleNavDrawer">
+        <span v-for="i in 4" :key="i" />
       </div>
-    </Menu>
+    </v-app-bar>
+  </template>
 
-    <div v-else class="nav-links">
-      <Link v-for="link in navItems" :link="link" />
-    </div>
-  </nav>
+  <div v-else class="nav-links">
+    <gc-link v-for="link in navItems" :link="link" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -35,8 +32,13 @@ import { isMobile } from "@/composables/mediaQueries";
 import { LinkType } from "@/components/link/types/link.types";
 import { gsap } from "gsap";
 
+import GcLink from "@/components/link/GcLink.vue";
+
 export default defineComponent({
   name: "Nav",
+  components: {
+    GcLink,
+  },
   props: {
     hideTitle: {
       type: Boolean,
@@ -66,22 +68,7 @@ export default defineComponent({
     };
 
     const setGSAP = (): void => {
-      if (isMobile.value) {
-        const menuItems = document.querySelectorAll(".menu-item");
-
-        menuItems.forEach((item, index) => {
-          if (!isNavDrawerOpen.value && index !== 2) {
-            gsap.to(item, {
-              y: 0,
-              opacity: 1,
-              duration: 0.5,
-              delay: index * 0.1,
-            });
-          }
-        });
-      } else {
-        gsap.to(".nav-links", { opacity: 1, x: 0, duration: 1.5 });
-      }
+      gsap.to(".nav-links", { opacity: 1, x: 0, duration: 1.5 });
     };
 
     watch(isMobile, () => setTimeout(setGSAP, 50), { immediate: true });
@@ -99,15 +86,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/styles/components/menu-button.scss";
 
-.nav {
-  position: absolute;
-  width: 100%;
+.gc-link {
+  &:hover {
+    background: lighten($background, 5%);
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px;
+  @media (max-width: 767px) {
+    padding: 15px;
+  }
+}
+
+.nav {
   z-index: 99;
+  background: none;
 
   .menu-item {
     transform: translateY(40px);
@@ -139,16 +130,6 @@ export default defineComponent({
 
     @media (min-width: 768px) {
       margin-right: 10%;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .link {
-      padding: 15px;
-
-      &:hover {
-        background: lighten($background, 5%);
-      }
     }
   }
 }
