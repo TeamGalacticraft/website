@@ -1,29 +1,28 @@
 <template>
-  <template v-if="isMobile">
-    <v-navigation-drawer
-      class="bg-background"
-      location="end"
-      v-model="isNavDrawerOpen"
-    >
-      <v-list class="px-0 mt-8" nav>
-        <v-list-item class="px-0" v-for="link in navItems">
-          <gc-link class="pl-6" :link="link" @click="toggleNavDrawer" />
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+  <v-navigation-drawer
+    v-if="isMobile"
+    class="bg-background"
+    location="end"
+    v-model="isNavDrawerOpen"
+  >
+    <v-list class="px-0 mt-8" nav>
+      <v-list-item class="px-0" v-for="link in navItems">
+        <gc-link class="pl-6" :link="link" @click="toggleNavDrawer" />
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 
-    <v-app-bar class="nav px-4" flat>
-      <v-spacer />
+  <v-app-bar class="nav px-4" flat>
+    <v-spacer />
 
-      <div class="menu-btn" @click="toggleNavDrawer">
-        <span v-for="i in 4" :key="i" />
-      </div>
-    </v-app-bar>
-  </template>
+    <div v-if="isMobile" class="menu-btn" @click="toggleNavDrawer">
+      <span v-for="i in 4" :key="i" />
+    </div>
 
-  <div v-else class="nav-links">
-    <gc-link v-for="link in navItems" :link="link" />
-  </div>
+    <div v-else class="nav-links">
+      <gc-link v-for="link in navItems" :link="link" />
+    </div>
+  </v-app-bar>
 </template>
 
 <script lang="ts">
@@ -86,13 +85,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/styles/components/menu-button.scss";
 
-.gc-link {
-  &:hover {
-    background: lighten($background, 5%);
-  }
-
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
+  .gc-link {
     padding: 15px;
+
+    &:hover {
+      background: lighten($background, 5%);
+    }
   }
 }
 
@@ -103,22 +102,6 @@ export default defineComponent({
   .menu-item {
     transform: translateY(40px);
     opacity: 0;
-  }
-
-  &-title {
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 40px;
-      height: 40px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin: 0;
-      margin-left: 10px;
-    }
   }
 
   &-links {

@@ -23,29 +23,24 @@
         class="header-buttons"
         :class="{ 'mt-10': isMobile, 'mt-6': !isMobile }"
       >
-        <Button
+        <v-btn
           v-if="!isMobile"
-          class="mr-2 header-button__download"
-          background-colour=""
-          text-colour="primary"
-          border-colour="primary"
-          :border-width="2"
-          :width="200"
-          :height="50"
+          class="mr-2 fw-700 header-button__download"
+          variant="outlined"
+          color="primary"
+          size="large"
         >
-          DOWNLOAD
-        </Button>
+          Download
+        </v-btn>
         <nuxt-link to="/changelog">
-          <Button
+          <v-btn
             class="header-button__changelog"
-            background-colour=""
-            text-colour="secondary"
-            border-colour="secondary"
-            :width="200"
-            :height="50"
+            color="white"
+            variant="outlined"
+            size="large"
           >
             View changelog
-          </Button>
+          </v-btn>
         </nuxt-link>
       </div>
     </div>
