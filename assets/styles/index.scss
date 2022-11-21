@@ -9,21 +9,23 @@
 
 html,
 body,
-#app,
-#__nuxt {
-  height: 100%;
+#default,
+#__nuxt,
+.v-application,
+.v-application__wrap {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: $background;
   color: $secondary;
   letter-spacing: 1px;
 }
 
 body,
-button {
+button,
+.v-application {
   font-family: "Montserrat", sans-serif;
 }
 

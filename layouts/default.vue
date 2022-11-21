@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="default">
     <template v-if="!loading">
       <main>
         <Nav />
@@ -44,7 +44,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#app {
+#default {
   display: grid;
   grid-gap: 50px;
   grid-template-columns: 1fr;
