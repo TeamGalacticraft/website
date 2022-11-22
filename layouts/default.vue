@@ -2,23 +2,32 @@
   <v-layout id="default">
     <template v-if="!loading">
       <main>
-        <Nav />
+        <gc-nav />
         <!-- Reset page to activate transitions -->
         <div :key="route.path">
           <slot />
         </div>
       </main>
 
-      <Footer />
+      <gc-footer />
     </template>
 
-    <Loading v-else />
+    <gc-loading v-else />
   </v-layout>
 </template>
 
 <script lang="ts">
+import GcNav from "@/components/nav/GcNav.vue";
+import GcFooter from "@/components/footer/GcFooter.vue";
+import GcLoading from "@/components/loading/GcLoading.vue";
+
 export default defineComponent({
   name: "default",
+  components: {
+    GcFooter,
+    GcNav,
+    GcLoading,
+  },
   setup() {
     const route = useRoute();
     const loading = ref<boolean>(true);

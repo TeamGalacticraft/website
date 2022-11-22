@@ -1,16 +1,16 @@
 <template>
-  <div class="header">
-    <div class="header-content">
-      <div class="header-text">
+  <div class="gc-header">
+    <div class="gc-header-content">
+      <div class="gc-header-text">
         <transition appear>
           <img
-            class="header-text__img"
+            class="gc-header-text__img"
             src="@/assets/galactic-graphic.png"
             alt=""
           />
         </transition>
         <p
-          class="header-text__p text-14"
+          class="gc-header-text__p text-14"
           :class="{ 'my-6 w-85 mx-auto': isMobile }"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a
@@ -20,12 +20,12 @@
       </div>
 
       <div
-        class="header-buttons"
+        class="gc-header-buttons"
         :class="{ 'mt-10': isMobile, 'mt-6': !isMobile }"
       >
         <v-btn
           v-if="!isMobile"
-          class="mr-2 fw-700 header-button__download"
+          class="mr-2 fw-700 gc-header-button__download"
           variant="outlined"
           color="primary"
           size="large"
@@ -34,7 +34,7 @@
         </v-btn>
         <nuxt-link to="/changelog">
           <v-btn
-            class="header-button__changelog"
+            class="gc-header-button__changelog"
             color="white"
             variant="outlined"
             size="large"
@@ -53,19 +53,19 @@ import { isMobile, isTablet } from "@/composables/mediaQueries";
 import { gsap } from "gsap";
 
 export default defineComponent({
-  name: "Header",
+  name: "GcHeader",
   setup() {
     const setGSAP = (): void => {
-      gsap.to(".header-text__img", { opacity: 1, y: 0, duration: 1.5 });
-      gsap.to(".header-text__p", { opacity: 1, y: 0, duration: 1.5 });
-      gsap.to(".header-button__changelog", {
+      gsap.to(".gc-header-text__img", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".gc-header-text__p", { opacity: 1, y: 0, duration: 1.5 });
+      gsap.to(".gc-header-button__changelog", {
         opacity: 1,
         y: 0,
         duration: 1.5,
       });
 
       if (!isMobile.value) {
-        gsap.to(".header-button__download", {
+        gsap.to(".gc-header-button__download", {
           opacity: 1,
           y: 0,
           duration: 1.5,
@@ -86,7 +86,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.header {
+.gc-header {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("@/assets/header-bg.png");
   height: 600px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <gc-header />
 
     <div class="blog mt-8">
       <div
@@ -9,7 +9,7 @@
         :class="`blog-item-${i}`"
         :data-trigger-id="`blog-item-${i}`"
       >
-        <BlogItem :last-item="i + 1 === mockBlogs.length" :blog="blog" />
+        <gc-blog-item :last-item="i + 1 === mockBlogs.length" :blog="blog" />
       </div>
     </div>
   </div>
@@ -19,6 +19,9 @@
 import { defineComponent } from "vue";
 import { BlogItem } from "~~/components/blog-item/types/blogItem.types";
 
+import GcHeader from "@/components/header/GcHeader.vue";
+import GcBlogItem from "@/components/blog-item/GcBlogItem.vue";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,6 +29,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default defineComponent({
   name: "Index",
+  components: {
+    GcHeader,
+    GcBlogItem,
+  },
   setup() {
     const mockBlogs: BlogItem[] = [
       {

@@ -1,9 +1,9 @@
 <template>
-  <div class="blog">
-    <div class="blog-container">
+  <div class="gc-blog">
+    <div class="gc-blog-container">
       <div>
-        <div class="blog-title-container w-100">
-          <div class="blog-title">
+        <div class="gc-blog-title-container w-100">
+          <div class="gc-blog-title">
             <h3 class="m-0 text-24 text-ellipsis">{{ blog.title }}</h3>
             <p class="m-0 text-primary text-12">{{ formatDate(blog.date) }}</p>
           </div>
@@ -33,7 +33,7 @@ import { isMobile } from "@/composables/mediaQueries";
 import { formatDate } from "@/composables/time";
 
 export default defineComponent({
-  name: "BlogItem",
+  name: "GcBlogItem",
   props: {
     blog: {
       type: Object as PropType<BlogItem>,
@@ -59,7 +59,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.blog {
+.gc-blog {
   &-container {
     padding: 30px 20px;
     display: flex;
@@ -67,20 +67,20 @@ export default defineComponent({
     cursor: pointer;
   }
 
-  .blog-title-container {
+  .gc-blog-title-container {
     display: flex;
     align-items: center;
   }
 
   &-item {
     &:nth-child(even) {
-      .blog-title-container {
+      .gc-blog-title-container {
         justify-content: space-between;
       }
     }
 
     &:nth-child(odd) {
-      .blog-title {
+      .gc-blog-title {
         margin-left: 20px;
       }
 
@@ -114,13 +114,13 @@ export default defineComponent({
 
     &-item {
       &:nth-child(odd) {
-        .blog-container {
+        .gc-blog-container {
           grid-template-columns: 150px 1fr;
         }
       }
 
       &:nth-child(even) {
-        .blog-container {
+        .gc-blog-container {
           grid-template-columns: 1fr 150px;
         }
       }

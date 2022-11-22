@@ -12,14 +12,14 @@
     </v-list>
   </v-navigation-drawer>
 
-  <v-app-bar class="nav px-4" flat>
+  <v-app-bar class="gc-nav px-4" flat>
     <v-spacer />
 
     <div v-if="isMobile" class="menu-btn" @click="toggleNavDrawer">
       <span v-for="i in 4" :key="i" />
     </div>
 
-    <div v-else class="nav-links">
+    <div v-else class="gc-nav-links">
       <gc-link v-for="link in navItems" :link="link" />
     </div>
   </v-app-bar>
@@ -34,7 +34,7 @@ import { gsap } from "gsap";
 import GcLink from "@/components/link/GcLink.vue";
 
 export default defineComponent({
-  name: "Nav",
+  name: "GcNav",
   components: {
     GcLink,
   },
@@ -67,7 +67,7 @@ export default defineComponent({
     };
 
     const setGSAP = (): void => {
-      gsap.to(".nav-links", { opacity: 1, x: 0, duration: 1.5 });
+      gsap.to(".gc-nav-links", { opacity: 1, x: 0, duration: 1.5 });
     };
 
     watch(isMobile, () => setTimeout(setGSAP, 50), { immediate: true });
@@ -95,7 +95,7 @@ export default defineComponent({
   }
 }
 
-.nav {
+.gc-nav {
   z-index: 99;
   background: none;
 
