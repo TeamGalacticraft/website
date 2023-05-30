@@ -1,0 +1,18 @@
+@import "./variables.scss";
+
+@each $name, $colour in $gc-colours {
+  .xf-bg-#{$name} {
+    background: $colour;
+  }
+
+  .xf-icon-colour-#{$name} {
+    :deep(path),
+    :deep(rect) {
+      fill: #{$colour} !important;
+    }
+  }
+
+  .xf-text-colour-#{$name} {
+    color: $colour;
+  }
+}
