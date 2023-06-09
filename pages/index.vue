@@ -1,4 +1,5 @@
 <template>
+  <!-- Header -->
   <div class="header">
     <div class="xf-center">
       <div class="xf-text-center xf-mb-2">
@@ -7,8 +8,29 @@
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-1">
         <xf-icon class="xf-mr-1" src="icons/flame.svg" />
-        <span class="xf-fw-600">1,000,000+</span>
+        <span class="xf-fw-600">15,527,478</span>
         <span class="xf-ml-1 xf-text-colour-grey">DOWNLOADS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blogs -->
+  <div class="blogs xf-py-8">
+    <div
+      v-for="(blog, i) in blogs"
+      :key="i"
+      class="blogs-item xf-text-colour-white xf-p-4"
+    >
+      <img class="xf-w-100" :src="blog.image" alt="" />
+
+      <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p>
+      <h2>{{ blog.title }}</h2>
+      <p class="xf-text-12 xf-mt-2">{{ blog.desc }}</p>
+
+      <div class="xf-text-10 xf-mt-4 xf-text-colour-secondary">
+        <span>{{ blog.date }}</span>
+        -
+        <span>{{ blog.length }} min read</span>
       </div>
     </div>
   </div>
@@ -16,6 +38,41 @@
 
 <script lang="ts" setup>
 import { XfIcon } from "xf-cmpt-lib";
+
+const blogs = [
+  {
+    image: "blog-1.png",
+    tag: "Development update",
+    title: "Where is Galacticraft 5?",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun",
+    length: 5,
+    date: "6th June 2023",
+  },
+  {
+    image: "blog-2.png",
+    tag: "Competition",
+    title: "Planet designing contest",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun",
+    length: 3,
+    date: "27th May 2023",
+  },
+  {
+    image: "blog-3.png",
+    tag: "Tips & tricks",
+    title: "How to build a rocket",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun",
+    length: 10,
+    date: "21st May 2023",
+  },
+  {
+    image: "blog-4.png",
+    tag: "Showcase",
+    title: "New biome!",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun",
+    length: 3,
+    date: "1st March 2023",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
@@ -25,7 +82,7 @@ import { XfIcon } from "xf-cmpt-lib";
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-  height: 450px;
+  height: 400px;
   width: 100%;
   position: relative;
 
@@ -41,6 +98,20 @@ import { XfIcon } from "xf-cmpt-lib";
     max-width: 200px;
     margin: 0 auto;
     border: 1px solid map-get($gc-colours, "tertiary");
+  }
+}
+
+.blogs {
+  background: black;
+
+  &-item {
+    max-width: 350px;
+    margin: 0 auto;
+
+    img {
+      border: 1px solid map-get($gc-colours, "primary");
+      border-radius: 5px;
+    }
   }
 }
 </style>
