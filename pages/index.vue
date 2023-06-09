@@ -19,7 +19,8 @@
     <div
       v-for="(blog, i) in blogs"
       :key="i"
-      class="blogs-item xf-text-colour-white xf-p-4"
+      class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4"
+      @click="viewBlog(blog.id)"
     >
       <img class="xf-w-100" :src="blog.image" alt="" />
 
@@ -39,8 +40,11 @@
 <script lang="ts" setup>
 import { XfIcon } from "xf-cmpt-lib";
 
+const router = useRouter();
+
 const blogs = [
   {
+    id: 1,
     image: "blog-1.png",
     tag: "Development update",
     title: "Where is Galacticraft 5?",
@@ -49,6 +53,7 @@ const blogs = [
     date: "6th June 2023",
   },
   {
+    id: 2,
     image: "blog-2.png",
     tag: "Competition",
     title: "Planet designing contest",
@@ -57,6 +62,7 @@ const blogs = [
     date: "27th May 2023",
   },
   {
+    id: 3,
     image: "blog-3.png",
     tag: "Tips & tricks",
     title: "How to build a rocket",
@@ -65,6 +71,7 @@ const blogs = [
     date: "21st May 2023",
   },
   {
+    id: 4,
     image: "blog-4.png",
     tag: "Showcase",
     title: "New biome!",
@@ -73,6 +80,10 @@ const blogs = [
     date: "1st March 2023",
   },
 ];
+
+const viewBlog = (id: number): void => {
+  router.push(`/blog/${id}`);
+};
 </script>
 
 <style lang="scss" scoped>
