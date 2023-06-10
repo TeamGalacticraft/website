@@ -7,8 +7,8 @@
       </div>
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-1">
-        <xf-icon class="xf-mr-1" src="icons/flame.svg" />
-        <span class="xf-fw-600">15,527,478</span>
+        <xf-icon class="xf-mr-1 xf-fw-600" src="icons/flame.svg" />
+        <span class="">15,527,478</span>
         <span class="xf-ml-1 xf-text-colour-grey">DOWNLOADS</span>
       </div>
     </div>
@@ -44,7 +44,7 @@ const router = useRouter();
 
 const blogs = [
   {
-    id: 1,
+    id: "where-is-galacticraft-5",
     image: "blog-1.png",
     tag: "Development update",
     title: "Where is Galacticraft 5?",
@@ -53,7 +53,7 @@ const blogs = [
     date: "6th June 2023",
   },
   {
-    id: 2,
+    id: "where-is-galacticraft-5",
     image: "blog-2.png",
     tag: "Competition",
     title: "Planet designing contest",
@@ -62,7 +62,7 @@ const blogs = [
     date: "27th May 2023",
   },
   {
-    id: 3,
+    id: "where-is-galacticraft-5",
     image: "blog-3.png",
     tag: "Tips & tricks",
     title: "How to build a rocket",
@@ -71,7 +71,7 @@ const blogs = [
     date: "21st May 2023",
   },
   {
-    id: 4,
+    id: "where-is-galacticraft-5",
     image: "blog-4.png",
     tag: "Showcase",
     title: "New biome!",
@@ -81,7 +81,7 @@ const blogs = [
   },
 ];
 
-const viewBlog = (id: number): void => {
+const viewBlog = (id: string): void => {
   router.push(`/blog/${id}`);
 };
 </script>
@@ -113,7 +113,10 @@ const viewBlog = (id: number): void => {
 }
 
 .blogs {
-  background: black;
+  background-color: black;
+  background-image: url("/icons/star-bg.svg");
+  background-size: contain;
+  background-position: center;
 
   &-item {
     max-width: 350px;
