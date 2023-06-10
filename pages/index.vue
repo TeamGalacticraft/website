@@ -68,20 +68,20 @@ getMatchingBlog();
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-  height: 350px;
+  height: 400px;
   width: 100%;
   position: relative;
 
   img {
-    width: 320px;
+    width: 360px;
   }
 
   &-downloads {
     border-radius: 50px;
     text-align: center;
     color: white;
-    font-size: 10px;
-    max-width: 200px;
+    font-size: 12px;
+    max-width: 240px;
     margin: 0 auto;
     border: 1px solid map-get($gc-colours, "tertiary");
   }

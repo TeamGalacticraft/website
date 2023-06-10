@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="blog-post xf-text-colour-white xf-py-15 xf-px-6">
+  <div v-if="post" class="blog-post xf-text-colour-white xf-py-20 xf-px-6">
     <div class="max-width">
       <img
         class="xf-w-100 xf-mb-4"

@@ -10,7 +10,7 @@
     />
 
     <template #drawer>
-      <div class="gc-nav-items xf-p-8 xf-text-colour-white">
+      <div class="gc-nav-items xf-mt-8 xf-p-8 xf-text-colour-white">
         <ul>
           <li v-for="(opt, i) in navOptions" :key="i" class="xf-my-4">
             <a :href="opt.route">
@@ -60,7 +60,7 @@ const router = useRouter();
 
 <style lang="scss">
 .xf-nav {
-  margin-top: 10px !important;
+  margin-top: 15px !important;
 }
 </style>
 
