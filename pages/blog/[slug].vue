@@ -1,27 +1,27 @@
 <template>
   <div v-if="post" class="blog-post xf-text-colour-white xf-py-15 xf-px-6">
-    <img
-      class="xf-w-100 xf-mb-4"
-      :src="urlFor(post.mainImage.asset._ref).url()"
-      alt=""
-    />
+    <div class="max-width">
+      <img
+        class="xf-w-100 xf-mb-4"
+        :src="cmsImage(post.mainImage.asset._ref).url()"
+        alt=""
+      />
 
-    <div class="xf-mb-4">
-      <h1>{{ post.title }}</h1>
-      <p class="xf-text-10 xf-mt-1 xf-text-colour-secondary">
-        {{ formatDate(post.publishedAt) }}
-      </p>
+      <div class="xf-mb-4">
+        <h1>{{ post.title }}</h1>
+        <p class="xf-text-10 xf-mt-1 xf-text-colour-secondary">
+          {{ formatDate(post.publishedAt) }}
+        </p>
+      </div>
+
+      <sanity-blocks :blocks="post.body" :serializers="serializers" />
     </div>
-
-    <sanity-blocks :blocks="post.body" :serializers="serializers" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { SanityBlocks } from "sanity-blocks-vue-component";
-import { createClient } from "@sanity/client";
 import { Serializers } from "sanity-blocks-vue-component/dist/types";
-import imageUrlBuilder from "@sanity/image-url";
 
 import GcCarousel from "~/components/Carousel/GcCarousel.vue";
 
@@ -31,25 +31,15 @@ const route = useRoute();
 const post = ref<any>();
 
 // ** Sanity **
-const client = createClient({
-  projectId: "yiv23jd7",
-  dataset: "production",
-  apiVersion: "2023-06-10",
-});
-const builder = imageUrlBuilder(client);
 const serializers: Partial<Serializers> = {
   types: {
-    lineBreak: h("hr", { class: "line-break" }),
-    youtube: (props) => h("iframe", { src: props.url }),
-    gallery: (props) => h(GcCarousel, { images: props.images, builder }),
+    linebreak: () => h("hr", { class: "line-break" }),
+    youtube: (props: any) => h("iframe", { src: props.url }),
+    gallery: (props: any) => h(GcCarousel, { images: props.images }),
   },
 };
 
 // ** Methods **
-const urlFor = (source: any): any => {
-  return builder.image(source);
-};
-
 const getMatchingBlog = async () => {
   const { slug = "" } = route.params;
 
@@ -57,16 +47,6 @@ const getMatchingBlog = async () => {
     `*[_type == "post" && slug.current == $slug][0]`,
     { slug }
   );
-
-  console.log(post.value);
-};
-
-const formatDate = (date: Date): string => {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 };
 
 getMatchingBlog();

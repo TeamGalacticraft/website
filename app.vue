@@ -1,7 +1,7 @@
 <template>
-  <main>
-    <gc-nav />
+  <gc-nav />
 
+  <main>
     <nuxt-page />
   </main>
 </template>
@@ -12,4 +12,8 @@
 
 <style lang="scss">
 @import "./assets/styles/index.scss";
+
+main {
+  height: 100%;
+}
 </style>

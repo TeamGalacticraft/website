@@ -1,5 +1,14 @@
 <template>
-  <xf-nav transparent>
+  <xf-nav menu-button-colour="white" transparent>
+    <xf-icon
+      v-if="route.name === 'blog-slug'"
+      class="xf-hover xf-cursor-pointer"
+      src="/icons/arrow-left-solid.svg"
+      fill="white"
+      :size="20"
+      @click="router.push('/')"
+    />
+
     <template #drawer>
       <div class="gc-nav-items xf-p-8 xf-text-colour-white">
         <ul>
@@ -23,27 +32,37 @@
 </template>
 
 <script lang="ts" setup>
-import { XfNav, XfButton } from "xf-cmpt-lib";
+import { XfNav, XfButton, XfIcon } from "xf-cmpt-lib";
 
+// ** Data **
 const navOptions = [
   {
-    route: "",
-    text: "News",
+    route: "/",
+    text: "Home",
   },
   {
-    route: "",
+    route: "https://dev.discord.galacticraft.net/",
     text: "Discord",
   },
   {
-    route: "",
+    route: "https://forum.micdoodle8.com/",
     text: "Forum",
   },
-  {
-    route: "",
-    text: "Changelog",
-  },
+  // {
+  //   route: "/changelog",
+  //   text: "Changelog",
+  // },
 ];
+
+const route = useRoute();
+const router = useRouter();
 </script>
+
+<style lang="scss">
+.xf-nav {
+  margin-top: 10px !important;
+}
+</style>
 
 <style lang="scss" scoped>
 .gc-nav-items {
