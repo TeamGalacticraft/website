@@ -33,7 +33,7 @@ const post = ref<any>();
 // ** Sanity **
 const serializers: Partial<Serializers> = {
   types: {
-    linebreak: () => h("hr", { class: "line-break" }),
+    lineBreak: () => h("hr", { class: "line-break" }),
     youtube: (props: any) => h("iframe", { src: props.url }),
     gallery: (props: any) => h(GcCarousel, { images: props.images }),
   },

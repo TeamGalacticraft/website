@@ -7,9 +7,9 @@
       </div>
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-2">
-        <xf-icon class="xf-mr-1 xf-fw-600" src="icons/flame.svg" />
-        <span>15,527,478</span>
-        <span class="xf-ml-1 xf-text-colour-grey">DOWNLOADS</span>
+        <xf-icon class="xf-mr-1" src="icons/flame.svg" />
+        <span id="download-number" class="xf-fw-700 xf-text-12"></span>
+        <span class="xf-ml-1 xf-text-colour-grey xf-text-8">DOWNLOADS</span>
       </div>
     </div>
   </div>
@@ -62,9 +62,14 @@ getMatchingBlog();
 </script>
 
 <style lang="scss" scoped>
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
 .header {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url("../assets/header-bg.png");
+  background: url("../assets/header-bg.png");
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -77,13 +82,30 @@ getMatchingBlog();
   }
 
   &-downloads {
-    border-radius: 50px;
+    border-radius: 10px;
     text-align: center;
     color: white;
-    font-size: 12px;
-    max-width: 240px;
+    max-width: 220px;
     margin: 0 auto;
-    border: 1px solid map-get($gc-colours, "tertiary");
+    border: 1px solid #272727;
+
+    #download-number {
+      animation: counter 3s forwards;
+      counter-reset: num var(--num);
+
+      &::after {
+        content: counter(num);
+      }
+
+      @keyframes counter {
+        from {
+          --num: 0;
+        }
+        to {
+          --num: 15527478;
+        }
+      }
+    }
   }
 }
 
