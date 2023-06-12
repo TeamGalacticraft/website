@@ -4,6 +4,8 @@
   <main>
     <nuxt-page />
   </main>
+
+  <gc-footer />
 </template>
 
 <style>
@@ -12,8 +14,4 @@
 
 <style lang="scss">
 @import "./assets/styles/index.scss";
-
-main {
-  height: 100%;
-}
 </style>

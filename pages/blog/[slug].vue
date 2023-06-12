@@ -54,13 +54,8 @@ getMatchingBlog();
 
 <style lang="scss">
 .blog-post {
-  background-color: black;
-  background-image: url("/icons/star-bg.svg");
-  background-size: contain;
-  background-position: center;
-
   img {
-    border: 1px solid #00a8ff;
+    border: 1px solid map-get($gc-colours, "primary");
     border-radius: 5px;
   }
 
@@ -82,7 +77,7 @@ getMatchingBlog();
   }
 
   a {
-    color: #00a8ff;
+    color: map-get($gc-colours, "primary");
   }
 }
 </style>

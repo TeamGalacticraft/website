@@ -2,25 +2,30 @@
   <!-- Header -->
   <div class="header">
     <div class="xf-center">
-      <div class="xf-text-center xf-mb-2">
+      <div class="xf-text-center xf-mb-2 xf-mb-sm-4">
         <img src="../assets/galactic-graphic.png" alt="" />
       </div>
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-2">
         <xf-icon class="xf-mr-1" src="icons/flame.svg" />
-        <span id="download-number" class="xf-fw-700 xf-text-12"></span>
-        <span class="xf-ml-1 xf-text-colour-grey xf-text-8">DOWNLOADS</span>
+
+        <span id="counting-number" class="xf-fw-700 xf-text-12 xf-text-14-sm">
+          0
+        </span>
+        <span class="xf-ml-1 xf-text-colour-grey xf-text-8 xf-text-10-sm">
+          DOWNLOADS
+        </span>
       </div>
     </div>
   </div>
 
   <!-- Blogs -->
-  <div class="blogs xf-py-8">
+  <div class="blogs xf-pt-8 xf-mb-15">
     <div class="max-width">
       <div
         v-for="(blog, i) in blogs"
         :key="i"
-        class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4"
+        class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8"
         @click="viewBlog(blog.slug.current)"
       >
         <img
@@ -29,12 +34,16 @@
           alt=""
         />
 
-        <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
-        <h2>{{ blog.title }}</h2>
-        <p class="xf-text-12 xf-mt-2">{{ blog.description }}</p>
+        <div class="xf-mt-sm-2">
+          <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
+          <h2 class="xf-text-28-sm">{{ blog.title }}</h2>
+          <p class="xf-text-12 xf-text-14-sm xf-mt-2">{{ blog.description }}</p>
 
-        <div class="xf-text-10 xf-mt-4 xf-text-colour-secondary">
-          <span>{{ formatDate(blog.publishedAt) }}</span>
+          <div
+            class="xf-text-10 xf-text-12-sm xf-mt-4 xf-text-colour-secondary"
+          >
+            <span>{{ formatDate(blog.publishedAt) }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +59,46 @@ const router = useRouter();
 const blogs = ref<any>([]);
 
 // ** Methods **
+const startCountdown = () => {
+  const countingElement: HTMLElement | null =
+    document.getElementById("counting-number");
+  const startNumber: number = 0;
+  const endNumber: number = 15527478;
+  const duration: number = 3000;
+
+  let currentNumber: number = startNumber;
+  let startTime: number | null = null;
+
+  const easeOutQuad = (t: number): number => t * (2 - t);
+
+  const animate = (timestamp: number): void => {
+    if (!startTime) {
+      startTime = timestamp;
+    }
+
+    const progress: number = timestamp - startTime;
+    const percentage: number = Math.min(progress / duration, 1);
+    const easedPercentage: number = easeOutQuad(percentage);
+
+    currentNumber = Math.floor(
+      easedPercentage * (endNumber - startNumber) + startNumber
+    );
+
+    if (countingElement) {
+      countingElement.textContent = currentNumber.toString();
+    }
+
+    if (progress < duration) {
+      // Schedule the next frame
+      requestAnimationFrame(animate);
+    }
+  };
+
+  requestAnimationFrame(animate);
+};
+
+onMounted(startCountdown);
+
 const getMatchingBlog = async (): Promise<void> => {
   blogs.value = await client.fetch(`*[_type == "post"]`);
 };
@@ -62,10 +111,13 @@ getMatchingBlog();
 </script>
 
 <style lang="scss" scoped>
-@property --num {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
+@keyframes counting {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -87,35 +139,27 @@ getMatchingBlog();
     color: white;
     max-width: 220px;
     margin: 0 auto;
-    border: 1px solid #272727;
+    border: 1px solid map-get($gc-colours, "tertiary");
 
-    #download-number {
-      animation: counter 3s forwards;
-      counter-reset: num var(--num);
+    #counting-number {
+      animation: counting 3s linear;
+    }
+  }
 
-      &::after {
-        content: counter(num);
-      }
+  @include sm-up {
+    height: 500px;
 
-      @keyframes counter {
-        from {
-          --num: 0;
-        }
-        to {
-          --num: 15527478;
-        }
-      }
+    img {
+      width: 550px;
+    }
+
+    &-downloads {
+      max-width: 260px;
     }
   }
 }
 
 .blogs {
-  background-color: black;
-  background-image: url("/icons/star-bg.svg");
-  background-size: contain;
-  background-position: center;
-  height: 100%;
-
   &-item {
     img {
       border: 1px solid map-get($gc-colours, "primary");

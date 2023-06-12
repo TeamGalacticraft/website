@@ -1,8 +1,19 @@
 @import "./variables.scss";
 
+body {
+  background-color: black;
+  background-image: url("/icons/star-bg.svg");
+  background-size: contain;
+  background-position: center;
+}
+
 .max-width {
   max-width: 350px;
   margin: 0 auto;
+
+  @include sm-up {
+    max-width: 500px;
+  }
 }
 
 @each $name, $colour in $gc-colours {

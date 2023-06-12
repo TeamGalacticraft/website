@@ -1,5 +1,10 @@
 <template>
-  <xf-nav menu-button-colour="white" transparent>
+  <xf-nav
+    menu-button-colour="white"
+    background-colour="black"
+    :inner-padding="5"
+    transparent
+  >
     <xf-icon
       v-if="route.name === 'blog-slug'"
       class="xf-hover xf-cursor-pointer"
@@ -12,8 +17,12 @@
     <template #drawer>
       <div class="gc-nav-items xf-mt-8 xf-p-8 xf-text-colour-white">
         <ul>
-          <li v-for="(opt, i) in navOptions" :key="i" class="xf-my-4">
-            <a :href="opt.route">
+          <li
+            v-for="(opt, i) in navOptions"
+            :key="i"
+            class="xf-my-4 xf-my-sm-8"
+          >
+            <a class="xf-text-18-sm" :href="opt.route">
               {{ opt.text }}
             </a>
           </li>
@@ -58,18 +67,18 @@ const route = useRoute();
 const router = useRouter();
 </script>
 
-<style lang="scss">
-.xf-nav {
-  margin-top: 15px !important;
-}
-</style>
-
 <style lang="scss" scoped>
 .gc-nav-items {
   text-align: center;
 
   .xf-button {
     border-radius: 50px;
+
+    @include sm-up {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+      font-size: 18px !important;
+    }
   }
 
   a {
