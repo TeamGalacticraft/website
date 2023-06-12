@@ -1,21 +1,19 @@
 <template>
   <div v-if="post" class="blog-post xf-text-colour-white xf-py-20 xf-px-6">
-    <div class="max-width">
-      <img
-        class="xf-w-100 xf-mb-4"
-        :src="cmsImage(post.mainImage.asset._ref).url()"
-        alt=""
-      />
+    <img
+      class="xf-w-100 xf-mb-4"
+      :src="cmsImage(post.mainImage.asset._ref).url()"
+      alt=""
+    />
 
-      <div class="xf-mb-4">
-        <h1>{{ post.title }}</h1>
-        <p class="xf-text-10 xf-mt-1 xf-text-colour-secondary">
-          {{ formatDate(post.publishedAt) }}
-        </p>
-      </div>
-
-      <sanity-blocks :blocks="post.body" :serializers="serializers" />
+    <div class="xf-mb-4">
+      <h1>{{ post.title }}</h1>
+      <p class="xf-text-10 xf-mt-1 xf-text-colour-secondary">
+        {{ formatDate(post.publishedAt) }}
+      </p>
     </div>
+
+    <sanity-blocks :blocks="post.body" :serializers="serializers" />
   </div>
 </template>
 
@@ -54,6 +52,18 @@ getMatchingBlog();
 
 <style lang="scss">
 .blog-post {
+  max-width: 350px;
+  margin: 0 auto;
+
+  @include sm-up {
+    max-width: 500px;
+  }
+
+  @include md-up {
+    margin-top: 60px;
+    max-width: 650px;
+  }
+
   img {
     border: 1px solid map-get($gc-colours, "primary");
     border-radius: 5px;

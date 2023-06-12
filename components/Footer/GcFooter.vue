@@ -1,7 +1,7 @@
 <template>
   <footer class="footer xf-text-colour-grey xf-p-6 xf-text-center">
-    <p class="xf-text-10">&copy; {{ currentYear }} Galacticraft.</p>
-    <p class="xf-ml-auto xf-text-10">
+    <p>&copy; {{ currentYear }} Galacticraft.</p>
+    <p class="xf-ml-auto">
       Created by
       <a href="https://alexlong.dev/" target="_blank">Alex</a>
     </p>
@@ -17,6 +17,14 @@ const currentYear: number = new Date().getFullYear();
 .footer {
   width: 100%;
   display: flex;
+
+  p {
+    font-size: 10px;
+
+    @include md-up {
+      font-size: 14px;
+    }
+  }
 
   a {
     color: map-get($gc-colours, "secondary") !important;

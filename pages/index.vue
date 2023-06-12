@@ -7,12 +7,14 @@
       </div>
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-2">
-        <xf-icon class="xf-mr-1" src="icons/flame.svg" />
+        <xf-icon class="xf-mr-1" fill="orange" src="icons/flame.svg" />
 
         <span id="counting-number" class="xf-fw-700 xf-text-12 xf-text-14-sm">
-          0
+          15500000
         </span>
-        <span class="xf-ml-1 xf-text-colour-grey xf-text-8 xf-text-10-sm">
+        <span
+          class="xf-ml-1 xf-text-colour-grey xf-text-8 xf-text-10-sm xf-text-14-md"
+        >
           DOWNLOADS
         </span>
       </div>
@@ -20,30 +22,39 @@
   </div>
 
   <!-- Blogs -->
-  <div class="blogs xf-pt-8 xf-mb-15">
-    <div class="max-width">
+  <div class="blogs xf-grid xf-pt-8 xf-mb-15">
+    <div
+      v-for="(blog, i) in blogs"
+      :key="i"
+      class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
+      :class="i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4'"
+      @click="viewBlog(blog.slug.current)"
+    >
+      <img
+        class="xf-w-100 xf-col-12"
+        :class="i === 0 ? 'xf-col-lg-7' : ''"
+        :src="cmsImage(blog.mainImage.asset._ref).url()"
+        alt=""
+      />
+
       <div
-        v-for="(blog, i) in blogs"
-        :key="i"
-        class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8"
-        @click="viewBlog(blog.slug.current)"
+        class="xf-mt-sm-2 xf-mt-lg-4 xf-col-12"
+        :class="i === 0 ? 'xf-col-lg-5 xf-col-xl-4 xf-ml-4' : ''"
       >
-        <img
-          class="xf-w-100"
-          :src="cmsImage(blog.mainImage.asset._ref).url()"
-          alt=""
-        />
+        <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
+        <h2 :class="i === 0 ? 'xf-fw-700 xf-text-32-lg' : ''">
+          {{ blog.title }}
+        </h2>
+        <p
+          class="xf-text-12 xf-text-14-sm xf-text-16-lg xf-mt-2 xf-text-ellipsis-3"
+        >
+          {{ blog.description }}
+        </p>
 
-        <div class="xf-mt-sm-2">
-          <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
-          <h2 class="xf-text-28-sm">{{ blog.title }}</h2>
-          <p class="xf-text-12 xf-text-14-sm xf-mt-2">{{ blog.description }}</p>
-
-          <div
-            class="xf-text-10 xf-text-12-sm xf-mt-4 xf-text-colour-secondary"
-          >
-            <span>{{ formatDate(blog.publishedAt) }}</span>
-          </div>
+        <div
+          class="xf-text-10 xf-text-12-sm xf-text-14-lg xf-mt-4 xf-mt-lg-6 xf-text-colour-secondary"
+        >
+          <span>{{ formatDate(blog.publishedAt) }}</span>
         </div>
       </div>
     </div>
@@ -62,9 +73,9 @@ const blogs = ref<any>([]);
 const startCountdown = () => {
   const countingElement: HTMLElement | null =
     document.getElementById("counting-number");
-  const startNumber: number = 0;
+  const startNumber: number = 15500000;
   const endNumber: number = 15527478;
-  const duration: number = 3000;
+  const duration: number = 2000;
 
   let currentNumber: number = startNumber;
   let startTime: number | null = null;
@@ -85,7 +96,7 @@ const startCountdown = () => {
     );
 
     if (countingElement) {
-      countingElement.textContent = currentNumber.toString();
+      countingElement.textContent = currentNumber.toLocaleString();
     }
 
     if (progress < duration) {
@@ -111,15 +122,6 @@ getMatchingBlog();
 </script>
 
 <style lang="scss" scoped>
-@keyframes counting {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .header {
   background: url("../assets/header-bg.png");
   background-size: cover;
@@ -142,7 +144,11 @@ getMatchingBlog();
     border: 1px solid map-get($gc-colours, "tertiary");
 
     #counting-number {
-      animation: counting 3s linear;
+      animation: counting 2s linear;
+
+      @include md-up {
+        font-size: 16px;
+      }
     }
   }
 
@@ -157,14 +163,79 @@ getMatchingBlog();
       max-width: 260px;
     }
   }
+
+  @include md-up {
+    height: 600px;
+
+    img {
+      width: 600px;
+    }
+  }
+
+  @include md-up {
+    height: 700px;
+
+    img {
+      width: 700px;
+    }
+
+    &-downloads {
+      max-width: 320px;
+    }
+  }
 }
 
 .blogs {
+  max-width: 350px;
+  margin: 0 auto;
+
+  @include sm-up {
+    max-width: 500px;
+  }
+
+  @include md-up {
+    width: 90%;
+    max-width: 1400px;
+  }
+
+  @include lg-up {
+    margin-top: 50px;
+  }
+
   &-item {
+    align-items: center;
+
+    @include md-up {
+      &-first {
+        img {
+          height: 400px;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
+        }
+      }
+    }
+
+    @include lg-up {
+      &-first {
+        img {
+          height: 450px;
+        }
+      }
+    }
+
     img {
       border: 1px solid map-get($gc-colours, "primary");
       border-radius: 5px;
     }
+  }
+}
+
+@keyframes counting {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>

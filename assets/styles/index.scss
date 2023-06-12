@@ -7,12 +7,13 @@ body {
   background-position: center;
 }
 
-.max-width {
-  max-width: 350px;
-  margin: 0 auto;
-
-  @include sm-up {
-    max-width: 500px;
+@for $i from 1 through 5 {
+  .xf-text-ellipsis-#{$i} {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    line-clamp: $i;
+    -webkit-box-orient: vertical;
   }
 }
 

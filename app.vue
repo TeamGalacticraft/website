@@ -8,6 +8,10 @@
   <gc-footer />
 </template>
 
+<script lang="ts" setup>
+onMounted(useMediaQuery);
+</script>
+
 <style>
 @import "xf-cmpt-lib/dist/cmpt-lib-ts.css";
 </style>
