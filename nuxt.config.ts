@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.SITE_URL,
+    },
+  },
   app: {
     head: {
       title: "Galacticraft",
@@ -12,7 +17,8 @@ export default defineNuxtConfig({
         {
           hid: "description",
           name: "description",
-          content: "",
+          content:
+            "Galacticraft is all about exploring other planets, moons and asteroids! Each planet, moon and asteroid belt is a dimension in the game. The same goes for space stations.",
         },
         {
           name: "apple-mobile-web-app-status-bar-style",
@@ -44,4 +50,5 @@ export default defineNuxtConfig({
   build: {
     transpile: ["mixins"],
   },
+  modules: ["nuxt-simple-sitemap"],
 });
