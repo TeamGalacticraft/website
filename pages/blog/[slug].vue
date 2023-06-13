@@ -56,7 +56,7 @@ const serializers: Partial<Serializers> = {
   }
 
   img {
-    border: 1px solid map-get($gc-colours, "primary");
+    border: 1px solid map-get($gc-colours, "tertiary");
     border-radius: 5px;
   }
 

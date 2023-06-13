@@ -1,10 +1,10 @@
 <template>
-  <footer class="footer xf-text-colour-grey xf-p-6 xf-text-center">
-    <p>&copy; {{ currentYear }} Galacticraft.</p>
-    <p class="xf-ml-auto">
+  <footer class="footer xf-text-colour-grey xf-p-6">
+    <p class="xf-text-center xf-w-100">&copy; {{ currentYear }} Galacticraft</p>
+    <!-- <p class="xf-ml-auto">
       Created by
       <a href="https://alexlong.dev/" target="_blank">Alex</a>
-    </p>
+    </p> -->
   </footer>
 </template>
 
