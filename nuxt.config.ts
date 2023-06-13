@@ -30,6 +30,15 @@ export default defineNuxtConfig({
         },
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-MC0JD5TPJK",
+          async: true,
+        },
+        {
+          src: "/ga.js",
+        },
+      ],
     },
   },
   vite: {

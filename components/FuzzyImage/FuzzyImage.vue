@@ -49,7 +49,6 @@ onMounted(lazyLoad);
 <style lang="scss" scoped>
 .fuzzy-image {
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   filter: blur(5px);
   background-image: v-bind(minImg);
@@ -61,7 +60,6 @@ onMounted(lazyLoad);
     height: 100%;
     width: 100%;
     z-index: -1;
-    background-position: center;
   }
 
   & > img {

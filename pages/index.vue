@@ -1,7 +1,11 @@
 <template>
   <!-- Header -->
   <div class="header">
-    <fuzzy-image img="/img/header-bg.png" min-img="/img/header-bg-min.png" />
+    <fuzzy-image
+      img="/img/header-bg.png"
+      min-img="/img/header-bg-min.png"
+      background
+    />
 
     <div class="xf-center">
       <div class="xf-text-center xf-mb-2 xf-mb-sm-4">
@@ -12,7 +16,7 @@
         <xf-icon class="xf-mr-1" fill="orange" src="icons/flame.svg" />
 
         <span id="counting-number" class="xf-fw-700 xf-text-12 xf-text-14-sm">
-          15500000
+          15527478
         </span>
         <span
           class="xf-ml-1 xf-text-colour-grey xf-text-8 xf-text-10-sm xf-text-14-md"
@@ -69,7 +73,7 @@ import { XfIcon } from "xf-cmpt-lib";
 // ** Data **
 const router = useRouter();
 
-const { data } = useSanityQuery('*[_type == "post"]');
+const { data } = await useSanityQuery('*[_type == "post"]');
 
 // ** Methods **
 const startCountdown = () => {
@@ -107,7 +111,15 @@ const startCountdown = () => {
     }
   };
 
-  requestAnimationFrame(animate);
+  const initLoad: string | null = sessionStorage.getItem("initLoad");
+
+  if (initLoad && countingElement) {
+    countingElement.textContent = endNumber.toLocaleString();
+  } else {
+    requestAnimationFrame(animate);
+
+    sessionStorage.setItem("initLoad", "true");
+  }
 };
 
 onMounted(startCountdown);
@@ -119,15 +131,6 @@ const viewBlog = (id: string): void => {
 
 <style lang="scss" scoped>
 .header {
-  // background: linear-gradient(
-  //     180deg,
-  //     rgba(0, 0, 0, 0) 0%,
-  //     rgba(0, 0, 0, 0.7) 100%
-  //   ),
-  //   url("../assets/header-bg-full.png");
-  // background-size: cover;
-  // background-position: right;
-  // background-repeat: no-repeat;
   height: 400px;
   width: 100%;
   position: relative;
@@ -183,10 +186,6 @@ const viewBlog = (id: string): void => {
     &-downloads {
       max-width: 320px;
     }
-  }
-
-  @include lg-up {
-    height: 800px;
   }
 }
 

@@ -26,7 +26,7 @@ import GcCarousel from "~/components/Carousel/GcCarousel.vue";
 // ** Data **
 const route = useRoute();
 
-const { data } = useSanityQuery(
+const { data } = await useSanityQuery(
   '*[_type == "post" && slug.current == $slug][0]',
   { slug: route.params.slug || "" }
 );
