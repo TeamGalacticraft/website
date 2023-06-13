@@ -1,9 +1,11 @@
 <template>
   <!-- Header -->
   <div class="header">
+    <fuzzy-image img="/img/header-bg.png" min-img="/img/header-bg-min.png" />
+
     <div class="xf-center">
       <div class="xf-text-center xf-mb-2 xf-mb-sm-4">
-        <img src="../assets/galactic-graphic.png" alt="" />
+        <img src="/img/galactic-graphic.png" alt="" />
       </div>
 
       <div class="header-downloads xf-flex-center xf-bg-black xf-py-2">
@@ -34,6 +36,7 @@
         class="xf-w-100 xf-col-12"
         :class="i === 0 ? 'xf-col-lg-6' : ''"
         :asset-id="blog.mainImage.asset._ref"
+        auto="format"
       />
 
       <div
@@ -116,10 +119,15 @@ const viewBlog = (id: string): void => {
 
 <style lang="scss" scoped>
 .header {
-  background: url("../assets/header-bg.png");
-  background-size: cover;
-  background-position: right;
-  background-repeat: no-repeat;
+  // background: linear-gradient(
+  //     180deg,
+  //     rgba(0, 0, 0, 0) 0%,
+  //     rgba(0, 0, 0, 0.7) 100%
+  //   ),
+  //   url("../assets/header-bg-full.png");
+  // background-size: cover;
+  // background-position: right;
+  // background-repeat: no-repeat;
   height: 400px;
   width: 100%;
   position: relative;
@@ -175,6 +183,10 @@ const viewBlog = (id: string): void => {
     &-downloads {
       max-width: 320px;
     }
+  }
+
+  @include lg-up {
+    height: 800px;
   }
 }
 

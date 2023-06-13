@@ -3,6 +3,7 @@
     <SanityImage
       class="xf-w-100 xf-mb-4"
       :asset-id="data.mainImage.asset._ref"
+      auto="format"
     />
 
     <div class="xf-mb-4">
