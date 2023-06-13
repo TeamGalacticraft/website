@@ -1,19 +1,18 @@
 <template>
-  <div v-if="post" class="blog-post xf-text-colour-white xf-py-20 xf-px-6">
-    <img
+  <div v-if="data" class="blog-post xf-text-colour-white xf-py-20 xf-px-6">
+    <SanityImage
       class="xf-w-100 xf-mb-4"
-      :src="cmsImage(post.mainImage.asset._ref).url()"
-      alt=""
+      :asset-id="data.mainImage.asset._ref"
     />
 
     <div class="xf-mb-4">
-      <h1>{{ post.title }}</h1>
+      <h1>{{ data.title }}</h1>
       <p class="xf-text-10 xf-mt-1 xf-text-colour-secondary">
-        {{ formatDate(post.publishedAt) }}
+        {{ formatDate(data.publishedAt) }}
       </p>
     </div>
 
-    <sanity-blocks :blocks="post.body" :serializers="serializers" />
+    <sanity-blocks :blocks="data.body" :serializers="serializers" />
   </div>
 </template>
 
@@ -26,7 +25,10 @@ import GcCarousel from "~/components/Carousel/GcCarousel.vue";
 // ** Data **
 const route = useRoute();
 
-const post = ref<any>();
+const { data } = useSanityQuery(
+  '*[_type == "post" && slug.current == $slug][0]',
+  { slug: route.params.slug || "" }
+);
 
 // ** Sanity **
 const serializers: Partial<Serializers> = {
@@ -36,18 +38,6 @@ const serializers: Partial<Serializers> = {
     gallery: (props: any) => h(GcCarousel, { images: props.images }),
   },
 };
-
-// ** Methods **
-const getMatchingBlog = async () => {
-  const { slug = "" } = route.params;
-
-  post.value = await client.fetch(
-    `*[_type == "post" && slug.current == $slug][0]`,
-    { slug }
-  );
-};
-
-getMatchingBlog();
 </script>
 
 <style lang="scss">

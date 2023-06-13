@@ -24,22 +24,21 @@
   <!-- Blogs -->
   <div class="blogs xf-grid xf-pt-8 xf-mb-15">
     <div
-      v-for="(blog, i) in blogs"
+      v-for="(blog, i) in data"
       :key="i"
       class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
       :class="i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4'"
       @click="viewBlog(blog.slug.current)"
     >
-      <img
+      <SanityImage
         class="xf-w-100 xf-col-12"
-        :class="i === 0 ? 'xf-col-lg-7' : ''"
-        :src="cmsImage(blog.mainImage.asset._ref).url()"
-        alt=""
+        :class="i === 0 ? 'xf-col-lg-6' : ''"
+        :asset-id="blog.mainImage.asset._ref"
       />
 
       <div
         class="xf-mt-sm-2 xf-mt-lg-4 xf-col-12"
-        :class="i === 0 ? 'xf-col-lg-5 xf-col-xl-4 xf-ml-4' : ''"
+        :class="i === 0 ? 'xf-col-lg-5 xf-ml-4' : ''"
       >
         <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
         <h2 :class="i === 0 ? 'xf-fw-700 xf-text-32-lg' : ''">
@@ -67,7 +66,7 @@ import { XfIcon } from "xf-cmpt-lib";
 // ** Data **
 const router = useRouter();
 
-const blogs = ref<any>([]);
+const { data } = useSanityQuery('*[_type == "post"]');
 
 // ** Methods **
 const startCountdown = () => {
@@ -110,15 +109,9 @@ const startCountdown = () => {
 
 onMounted(startCountdown);
 
-const getMatchingBlog = async (): Promise<void> => {
-  blogs.value = await client.fetch(`*[_type == "post"]`);
-};
-
 const viewBlog = (id: string): void => {
   router.push(`/blog/${id}`);
 };
-
-getMatchingBlog();
 </script>
 
 <style lang="scss" scoped>
@@ -208,7 +201,7 @@ getMatchingBlog();
     @include md-up {
       &-first {
         img {
-          height: 400px;
+          height: 350px;
           aspect-ratio: 16 / 9;
           object-fit: cover;
         }
@@ -218,13 +211,13 @@ getMatchingBlog();
     @include lg-up {
       &-first {
         img {
-          height: 450px;
+          height: 400px;
         }
       }
     }
 
     img {
-      border: 1px solid map-get($gc-colours, "primary");
+      border: 1px solid map-get($gc-colours, "tertiary");
       border-radius: 5px;
     }
   }

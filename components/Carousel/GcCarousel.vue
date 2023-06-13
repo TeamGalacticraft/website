@@ -1,7 +1,7 @@
 <template>
   <carousel class="gc-carousel" wrap-around>
     <slide v-for="(img, i) in images" :key="i">
-      <img class="xf-w-100" :src="cmsImage(img.asset._ref).url()" alt="" />
+      <SanityImage class="xf-w-100" :asset-id="img.asset._ref" />
     </slide>
 
     <template #addons>

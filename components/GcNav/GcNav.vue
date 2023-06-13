@@ -3,7 +3,7 @@
     menu-button-colour="white"
     background-colour="black"
     :menu-button="!isLarge"
-    :inner-padding="5"
+    :inner-padding="isLarge ? 8 : 5"
     transparent
   >
     <xf-icon
@@ -23,7 +23,8 @@
         v-for="(opt, i) in navOptions"
         class="xf-h-max-content"
         :href="opt.route"
-        :style="i > 1 ? 'order: 2' : ''"
+        :style="i > 0 ? 'order: 2' : ''"
+        :target="opt.route.startsWith('http') ? '_blank' : ''"
       >
         {{ opt.text }}
       </a>
@@ -68,10 +69,10 @@ import { XfNav, XfButton, XfIcon } from "xf-cmpt-lib";
 
 // ** Data **
 const navOptions = [
-  {
-    route: "/",
-    text: "Home",
-  },
+  // {
+  //   route: "/",
+  //   text: "Home",
+  // },
   {
     route: "https://dev.discord.galacticraft.net/",
     text: "Discord",
@@ -80,10 +81,10 @@ const navOptions = [
     route: "https://forum.micdoodle8.com/",
     text: "Forum",
   },
-  {
-    route: "/changelog",
-    text: "Changelog",
-  },
+  // {
+  //   route: "/changelog",
+  //   text: "Changelog",
+  // },
 ];
 
 const route = useRoute();

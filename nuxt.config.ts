@@ -50,5 +50,16 @@ export default defineNuxtConfig({
   build: {
     transpile: ["mixins"],
   },
-  modules: ["nuxt-simple-sitemap"],
+  modules: [
+    "nuxt-simple-sitemap",
+    [
+      "@nuxtjs/sanity",
+      {
+        projectId: "yiv23jd7",
+        dataset: "production",
+        apiVersion: "2023-06-10",
+        useCdn: false,
+      },
+    ],
+  ],
 });
