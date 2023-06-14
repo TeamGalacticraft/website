@@ -29,13 +29,19 @@
         {{ opt.text }}
       </a>
 
-      <xf-button
-        style="order: 1"
-        background-colour="primary"
-        text-colour="black"
-      >
-        Download
-      </xf-button>
+      <xf-menu background-colour="grey-darken-4">
+        <template #activator>
+          <xf-button
+            style="order: 1"
+            background-colour="primary"
+            text-colour="black"
+          >
+            Download
+          </xf-button>
+        </template>
+
+        <download-options />
+      </xf-menu>
     </div>
 
     <template v-if="!isLarge" #drawer>
@@ -52,20 +58,27 @@
           </li>
         </ul>
 
-        <xf-button
-          class="xf-mx-auto xf-mt-10"
-          background-colour="primary"
-          text-colour="black"
-        >
-          Download
-        </xf-button>
+        <xf-menu background-colour="grey-darken-4">
+          <template #activator>
+            <xf-button
+              class="xf-mx-auto xf-mt-4"
+              background-colour="primary"
+              text-colour="black"
+            >
+              Download
+            </xf-button>
+          </template>
+
+          <download-options />
+        </xf-menu>
       </div>
     </template>
   </xf-nav>
 </template>
 
 <script lang="ts" setup>
-import { XfNav, XfButton, XfIcon } from "xf-cmpt-lib";
+import { XfNav, XfButton, XfIcon, XfMenu } from "xf-cmpt-lib";
+import DownloadOptions from "./DownloadOptions.vue";
 
 // ** Data **
 const navOptions = [
@@ -94,6 +107,10 @@ const router = useRouter();
 <style lang="scss" scoped>
 .gc-nav-items {
   text-align: center;
+
+  :deep(.xf-menu-modal-content) {
+    border-radius: 10px;
+  }
 
   .xf-button {
     border-radius: 50px;

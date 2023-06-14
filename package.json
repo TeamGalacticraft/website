@@ -11,7 +11,7 @@
   "devDependencies": {
     "nuxt": "^3.5.3",
     "nuxt-simple-sitemap": "^2.6.2",
-    "xf-cmpt-lib": "^0.4.4"
+    "xf-cmpt-lib": "^0.4.6"
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.7.2",
