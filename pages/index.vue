@@ -2,8 +2,9 @@
   <!-- Header -->
   <div class="header">
     <fuzzy-image
-      img="/img/header-bg.png"
-      min-img="/img/header-bg-min.png"
+      img="/img/header-2.png"
+      min-img="/img/header-2-min.png"
+      linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 70%, #000000 100%)"
       background
     />
 
@@ -28,7 +29,7 @@
   </div>
 
   <!-- Blogs -->
-  <div class="blogs xf-grid xf-pt-8 xf-mb-15">
+  <div class="blogs xf-grid xf-pt-15 xf-mb-15">
     <div
       v-for="(blog, i) in data"
       :key="i"
@@ -214,7 +215,7 @@ const viewBlog = (id: string): void => {
         img {
           height: 350px;
           aspect-ratio: 16 / 9;
-          object-fit: cover;
+          object-fit: contain;
         }
       }
     }

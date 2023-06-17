@@ -7,6 +7,12 @@
     :data-image-full="img"
   >
     <img ref="image" :src="minImg" />
+
+    <div
+      v-if="linearGradient"
+      class="fuzzy-image-linear-overlay"
+      :style="`background: ${linearGradient}`"
+    />
   </div>
 </template>
 
@@ -16,6 +22,7 @@ const props = defineProps<{
   img: string;
   minImg: string;
   background?: boolean;
+  linearGradient?: string;
 }>();
 
 // ** Data **
@@ -49,6 +56,7 @@ onMounted(lazyLoad);
 <style lang="scss" scoped>
 .fuzzy-image {
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   filter: blur(5px);
   background-image: v-bind(minImg);
@@ -62,9 +70,19 @@ onMounted(lazyLoad);
     z-index: -1;
   }
 
+  &-linear-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
   & > img {
     display: block;
     height: 100%;
+    object-fit: cover;
     width: 100%;
   }
 

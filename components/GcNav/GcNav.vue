@@ -114,6 +114,8 @@ const router = useRouter();
 
   .xf-button {
     border-radius: 50px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
 
     @include sm-up {
       padding-top: 10px !important;
@@ -129,6 +131,8 @@ const router = useRouter();
 
   a {
     text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.1em;
   }
 }
 </style>
