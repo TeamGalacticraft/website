@@ -4,26 +4,51 @@
     <fuzzy-image
       img="/img/header-2.png"
       min-img="/img/header-2-min.png"
-      linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 70%, #000000 100%)"
+      linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.60) 75%, #000 100%)"
       background
     />
 
     <div class="xf-center">
-      <div class="xf-text-center xf-mb-2 xf-mb-sm-4">
+      <div class="xf-text-center xf-mb-2">
         <img src="/img/galactic-graphic.png" alt="" />
       </div>
 
-      <div class="header-downloads xf-flex-center xf-bg-black xf-py-2">
-        <xf-icon class="xf-mr-1" fill="orange" src="icons/flame.svg" />
-
-        <span id="counting-number" class="xf-fw-700 xf-text-12 xf-text-14-sm">
-          15527478
-        </span>
-        <span
-          class="xf-ml-1 xf-text-colour-grey xf-text-8 xf-text-10-sm xf-text-14-md"
+      <div class="xf-flex-center xf-col-gap-1">
+        <div
+          class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
+          @click="
+            goToDownloadPage(
+              'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy'
+            )
+          "
         >
-          DOWNLOADS
-        </span>
+          <xf-icon
+            class="xf-mr-2"
+            src="icons/curseforge.svg"
+            :size="isMedium ? 24 : 18"
+          />
+
+          <span id="curse-downloads" class="xf-fw-700 xf-text-12">
+            {{ curseDownloads.toLocaleString() }}
+          </span>
+        </div>
+
+        <div
+          class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
+          @click="
+            goToDownloadPage('https://modrinth.com/mod/galacticraft-legacy')
+          "
+        >
+          <xf-icon
+            class="xf-mr-2"
+            src="icons/modrinth.svg"
+            :size="isMedium ? 24 : 18"
+          />
+
+          <span id="modrinth-downloads" class="xf-fw-700 xf-text-12">
+            {{ modrinthDownloads.toLocaleString() }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -74,17 +99,25 @@ import { XfIcon } from "xf-cmpt-lib";
 // ** Data **
 const router = useRouter();
 
+const modrinthDownloads = ref<number>(0);
+const curseDownloads = ref<number>(0);
+
 const { data } = await useSanityQuery('*[_type == "post"]');
 
 // ** Methods **
-const startCountdown = () => {
-  const countingElement: HTMLElement | null =
-    document.getElementById("counting-number");
-  const startNumber: number = 15500000;
-  const endNumber: number = 15527478;
+await useFetch("/api/modrinth").then(
+  (res) => (modrinthDownloads.value = res.data.value?.downloads || 0)
+);
+
+await useFetch("/api/curseforge").then((res) => {
+  curseDownloads.value = res.data.value?.data.downloadCount || 0;
+});
+
+const startCountdown = (startValue: number, endValue: number, id: string) => {
+  const countingElement: HTMLElement | null = document.getElementById(id);
   const duration: number = 2000;
 
-  let currentNumber: number = startNumber;
+  let currentNumber: number = startValue;
   let startTime: number | null = null;
 
   const easeOutQuad = (t: number): number => t * (2 - t);
@@ -99,7 +132,7 @@ const startCountdown = () => {
     const easedPercentage: number = easeOutQuad(percentage);
 
     currentNumber = Math.floor(
-      easedPercentage * (endNumber - startNumber) + startNumber
+      easedPercentage * (endValue - startValue) + startValue
     );
 
     if (countingElement) {
@@ -115,19 +148,35 @@ const startCountdown = () => {
   const initLoad: string | null = sessionStorage.getItem("initLoad");
 
   if (initLoad && countingElement) {
-    countingElement.textContent = endNumber.toLocaleString();
+    countingElement.textContent = endValue.toLocaleString();
   } else {
     requestAnimationFrame(animate);
-
-    sessionStorage.setItem("initLoad", "true");
   }
 };
-
-onMounted(startCountdown);
 
 const viewBlog = (id: string): void => {
   router.push(`/blog/${id}`);
 };
+
+const goToDownloadPage = (route: string): void => {
+  window.open(route);
+};
+
+// ** Lifecycle **
+onMounted(() => {
+  startCountdown(
+    modrinthDownloads.value / 2,
+    modrinthDownloads.value,
+    "modrinth-downloads"
+  );
+  startCountdown(
+    curseDownloads.value / 2,
+    curseDownloads.value,
+    "curse-downloads"
+  );
+
+  sessionStorage.setItem("initLoad", "true");
+});
 </script>
 
 <style lang="scss" scoped>
@@ -144,15 +193,19 @@ const viewBlog = (id: string): void => {
     border-radius: 10px;
     text-align: center;
     color: white;
-    max-width: 220px;
-    margin: 0 auto;
-    border: 1px solid map-get($gc-colours, "tertiary");
+    width: 120px;
+    border: 1px solid #272727;
 
-    #counting-number {
+    @include sm-up {
+      width: 180px;
+    }
+
+    #modrinth-downloads,
+    #curse-downloads {
       animation: counting 2s linear;
 
-      @include md-up {
-        font-size: 16px;
+      @include sm-up {
+        font-size: 16px !important;
       }
     }
   }
