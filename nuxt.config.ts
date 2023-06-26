@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
   runtimeConfig: {
     public: {
       siteUrl: process.env.SITE_URL,
