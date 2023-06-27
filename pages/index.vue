@@ -274,7 +274,7 @@ onMounted(() => {
         img {
           height: 350px;
           aspect-ratio: 16 / 9;
-          object-fit: contain;
+          object-fit: cover;
         }
       }
     }

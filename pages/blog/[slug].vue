@@ -62,6 +62,8 @@ const serializers: Partial<Serializers> = {
   img {
     border: 1px solid map-get($gc-colours, "tertiary");
     border-radius: 5px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   p {
