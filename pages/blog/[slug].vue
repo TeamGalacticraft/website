@@ -31,6 +31,10 @@ const { data } = await useSanityQuery(
   { slug: route.params.slug || "" }
 );
 
+useHead({
+  title: data.value.title,
+});
+
 // ** Sanity **
 const serializers: Partial<Serializers> = {
   types: {

@@ -56,7 +56,7 @@
   <!-- Blogs -->
   <div class="blogs xf-grid xf-pt-15 xf-mb-15">
     <div
-      v-for="(blog, i) in data"
+      v-for="(blog, i) in content"
       :key="i"
       class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
       :class="i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4'"
@@ -64,17 +64,16 @@
     >
       <SanityImage
         class="xf-w-100 xf-col-12"
-        :class="i === 0 ? 'xf-col-lg-6' : ''"
+        :class="{ 'xf-col-lg-6': i === 0 }"
         :asset-id="blog.mainImage.asset._ref"
         auto="format"
       />
 
       <div
         class="xf-mt-sm-2 xf-mt-lg-4 xf-col-12"
-        :class="i === 0 ? 'xf-col-lg-5 xf-ml-4' : ''"
+        :class="{ 'xf-col-lg-5 xf-ml-4': i === 0 }"
       >
-        <!-- <p class="xf-text-10 xf-text-colour-secondary">{{ blog.tag }}</p> -->
-        <h2 :class="i === 0 ? 'xf-fw-700 xf-text-32-lg' : ''">
+        <h2 :class="{ 'xf-fw-700 xf-text-32-lg': i === 0 }">
           {{ blog.title }}
         </h2>
         <p
@@ -103,6 +102,13 @@ const modrinthDownloads = ref<number>(0);
 const curseDownloads = ref<number>(0);
 
 const { data } = await useSanityQuery('*[_type == "post"]');
+
+// ** Computed **
+const content = computed(() =>
+  data.value.sort(
+    (a: any, b: any) => new Date(b.publishedAt) - new Date(a.publishedAt)
+  )
+);
 
 // ** Methods **
 await useFetch("/api/modrinth").then(
