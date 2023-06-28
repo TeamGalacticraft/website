@@ -269,12 +269,15 @@ onMounted(() => {
   &-item {
     align-items: center;
 
+    img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
     @include md-up {
       &-first {
         img {
           height: 350px;
-          aspect-ratio: 16 / 9;
-          object-fit: cover;
         }
       }
     }
