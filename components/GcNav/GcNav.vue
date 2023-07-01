@@ -19,6 +19,7 @@
         <div v-if="route.name !== 'blog-slug'" style="width: 20px" />
 
         <xf-menu
+          v-if="route.path === '/'"
           class="xf-ml-auto xf-text-colour-white"
           background-colour="grey-darken-4"
         >
