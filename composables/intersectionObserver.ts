@@ -9,7 +9,6 @@ export const useIntersectionObserver = (elementId: string) => {
     const intersectionObserver: IntersectionObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
-          console.log(entry);
           if (entry.isIntersecting) {
             inView.value = true;
           }
