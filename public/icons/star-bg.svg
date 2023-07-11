@@ -1,26 +1,28 @@
 <svg width="1764" height="1449" viewBox="0 0 1764 1449" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="star-bg">
-<circle id="22" cx="3.5" cy="23.5" r="3.5" fill="white"/>
-<circle id="21" cx="324.5" cy="61.5" r="3.5" fill="white"/>
-<circle id="20" cx="10.5" cy="292.5" r="3.5" fill="white"/>
-<circle id="19" cx="486.5" cy="681.5" r="3.5" fill="white"/>
-<circle id="18" cx="486.5" cy="681.5" r="3.5" fill="white"/>
-<circle id="17" cx="734.5" cy="46.5" r="3.5" fill="white"/>
-<circle id="16" cx="94.5" cy="563.5" r="3.5" fill="white"/>
-<circle id="15" cx="1019.5" cy="3.5" r="3.5" fill="white"/>
-<circle id="14" cx="1181.5" cy="161.5" r="3.5" fill="white"/>
-<circle id="13" cx="1421.5" cy="68.5" r="3.5" fill="white"/>
-<circle id="12" cx="1683.5" cy="54.5" r="3.5" fill="white"/>
-<circle id="11" cx="1596.5" cy="432.5" r="3.5" fill="white"/>
-<circle id="10" cx="1727.5" cy="570.5" r="3.5" fill="white"/>
-<circle id="9" cx="1364.5" cy="640.5" r="3.5" fill="white"/>
-<circle id="8" cx="1012.5" cy="688.5" r="3.5" fill="white"/>
-<circle id="7" cx="40.5" cy="951.5" r="3.5" fill="white"/>
-<circle id="6" cx="574.5" cy="1296.5" r="3.5" fill="white"/>
-<circle id="5" cx="1065.5" cy="1445.5" r="3.5" fill="white"/>
-<circle id="4" cx="1632.5" cy="1303.5" r="3.5" fill="white"/>
-<circle id="3" cx="1155.5" cy="895.5" r="3.5" fill="white"/>
-<circle id="2" cx="69.5" cy="1418.5" r="3.5" fill="white"/>
-<circle id="1" cx="1760.5" cy="994.5" r="3.5" fill="white"/>
-</g>
+<circle cx="3.5" cy="23.5" r="3.5" fill="white"/>
+<circle cx="324.5" cy="61.5" r="3.5" fill="white"/>
+<circle cx="9.5" cy="291.5" r="2.5" fill="white"/>
+<circle cx="486.5" cy="681.5" r="3.5" fill="white"/>
+<circle cx="486.5" cy="681.5" r="3.5" fill="white"/>
+<circle cx="734.5" cy="46.5" r="3.5" fill="white"/>
+<circle cx="96" cy="565" r="5" fill="white"/>
+<circle cx="1019.5" cy="3.5" r="3.5" fill="white"/>
+<circle cx="1183" cy="163" r="5" fill="white"/>
+<circle cx="1421.5" cy="68.5" r="3.5" fill="white"/>
+<circle cx="1683.5" cy="54.5" r="3.5" fill="white"/>
+<circle cx="1595.5" cy="431.5" r="2.5" fill="white"/>
+<circle cx="1727.5" cy="570.5" r="3.5" fill="white"/>
+<circle cx="1364.5" cy="640.5" r="3.5" fill="white"/>
+<circle cx="1011.5" cy="687.5" r="2.5" fill="white"/>
+<circle cx="578.5" cy="346.5" r="2.5" fill="white"/>
+<circle cx="550.5" cy="1055.5" r="2.5" fill="white"/>
+<circle cx="983" cy="429" r="5" fill="white"/>
+<circle cx="40.5" cy="951.5" r="3.5" fill="white"/>
+<circle cx="573.5" cy="1295.5" r="2.5" fill="white"/>
+<circle cx="1065.5" cy="1445.5" r="3.5" fill="white"/>
+<circle cx="1634" cy="1305" r="5" fill="white"/>
+<circle cx="1155.5" cy="895.5" r="3.5" fill="white"/>
+<circle cx="69.5" cy="1418.5" r="3.5" fill="white"/>
+<circle cx="1058.5" cy="1203.5" r="3.5" fill="white"/>
+<circle cx="1760.5" cy="994.5" r="3.5" fill="white"/>
 </svg>

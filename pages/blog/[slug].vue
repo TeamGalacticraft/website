@@ -1,5 +1,10 @@
 <template>
-  <div v-if="data" class="blog-post xf-text-colour-white xf-py-20 xf-px-6">
+  <div
+    v-if="data"
+    id="blog"
+    class="blog-post xf-text-colour-white xf-py-20 xf-px-6 transition"
+    :class="{ 'transition-in-view': inView }"
+  >
     <SanityImage
       class="xf-w-100 xf-mb-4"
       :asset-id="data.mainImage.asset._ref"
@@ -18,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { SanityBlocks } from "sanity-blocks-vue-component";
 import { Serializers } from "sanity-blocks-vue-component/dist/types";
 
@@ -30,6 +36,8 @@ const { data } = await useSanityQuery(
   '*[_type == "post" && slug.current == $slug][0]',
   { slug: route.params.slug || "" }
 );
+
+const { inView } = useIntersectionObserver("blog");
 
 useHead({
   title: data.value.title,

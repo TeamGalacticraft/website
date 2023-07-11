@@ -1,53 +1,55 @@
 <template>
   <!-- Header -->
   <div class="header">
-    <fuzzy-image
-      img="/img/header-2.png"
-      min-img="/img/header-2-min.png"
+    <xf-fuzzy-image
+      img="/img/header.png"
+      min-img="/img/header-min.png"
       linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.60) 75%, #000 100%)"
       background
     />
 
-    <div class="xf-center">
-      <div class="xf-text-center xf-mb-2">
-        <img src="/img/galactic-graphic.png" alt="" />
-      </div>
-
-      <div class="xf-flex-center xf-col-gap-1">
-        <div
-          class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
-          @click="
-            goToDownloadPage(
-              'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy'
-            )
-          "
-        >
-          <xf-icon
-            class="xf-mr-2"
-            src="icons/curseforge.svg"
-            :size="isMedium ? 24 : 18"
-          />
-
-          <span id="curse-downloads" class="xf-fw-700 xf-text-12">
-            {{ curseDownloads.toLocaleString() }}
-          </span>
+    <div id="header" class="xf-center">
+      <div class="transition" :class="{ 'transition-in-view': headerInView }">
+        <div class="xf-text-center xf-mb-2">
+          <img src="/img/galactic-graphic.png" alt="" />
         </div>
 
-        <div
-          class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
-          @click="
-            goToDownloadPage('https://modrinth.com/mod/galacticraft-legacy')
-          "
-        >
-          <xf-icon
-            class="xf-mr-2"
-            src="icons/modrinth.svg"
-            :size="isMedium ? 24 : 18"
-          />
+        <div class="xf-flex-center xf-col-gap-1">
+          <div
+            class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
+            @click="
+              goToDownloadPage(
+                'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy'
+              )
+            "
+          >
+            <xf-icon
+              class="xf-mr-2"
+              src="icons/curseforge.svg"
+              :size="isMedium ? 24 : 18"
+            />
 
-          <span id="modrinth-downloads" class="xf-fw-700 xf-text-12">
-            {{ modrinthDownloads.toLocaleString() }}
-          </span>
+            <span id="curse-downloads" class="xf-fw-700 xf-text-12">
+              {{ curseDownloads.toLocaleString() }}
+            </span>
+          </div>
+
+          <div
+            class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
+            @click="
+              goToDownloadPage('https://modrinth.com/mod/galacticraft-legacy')
+            "
+          >
+            <xf-icon
+              class="xf-mr-2"
+              src="icons/modrinth.svg"
+              :size="isMedium ? 24 : 18"
+            />
+
+            <span id="modrinth-downloads" class="xf-fw-700 xf-text-12">
+              {{ modrinthDownloads.toLocaleString() }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -58,8 +60,12 @@
     <div
       v-for="(blog, i) in content"
       :key="i"
-      class="blogs-item xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
-      :class="i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4'"
+      :id="`blog-${i}`"
+      class="blogs-item transition xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
+      :class="[
+        i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4',
+        { 'transition-in-view': itemsInView[i].inView },
+      ]"
       @click="viewBlog(blog.slug.current)"
     >
       <SanityImage
@@ -93,14 +99,17 @@
 </template>
 
 <script lang="ts" setup>
-import { XfIcon } from "xf-cmpt-lib";
+import { useIntersectionObserver } from "@/composables/intersectionObserver";
+import { XfIcon, XfFuzzyImage } from "xf-cmpt-lib";
 
 // ** Data **
 const router = useRouter();
 
 const modrinthDownloads = ref<number>(0);
 const curseDownloads = ref<number>(0);
+const itemsInView = ref<{ inView: Ref<boolean> }[]>([]);
 
+const { inView: headerInView } = useIntersectionObserver("header");
 const { data } = await useSanityQuery('*[_type == "post"]');
 
 // ** Computed **
@@ -111,6 +120,10 @@ const content = computed(() =>
 );
 
 // ** Methods **
+content.value.forEach((_c: any, i: number) => {
+  itemsInView.value[i] = useIntersectionObserver(`blog-${i}`);
+});
+
 await useFetch("/api/modrinth").then(
   (res) => (modrinthDownloads.value = res.data.value?.downloads || 0)
 );

@@ -6,6 +6,8 @@
   </main>
 
   <gc-footer />
+
+  <background />
 </template>
 
 <script lang="ts" setup>
