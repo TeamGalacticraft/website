@@ -33,7 +33,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       script: [
         {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-MC0JD5TPJK",
+          src: `https://www.googletagmanager.com/gtag/js?id=G-${process.env.GA_KEY}`,
           async: true,
         },
         {
@@ -65,9 +65,9 @@ export default defineNuxtConfig({
     [
       "@nuxtjs/sanity",
       {
-        projectId: "yiv23jd7",
+        projectId: process.env.SANITY_KEY,
         dataset: "production",
-        apiVersion: "2023-06-10",
+        apiVersion: "2023-07-12",
         useCdn: false,
       },
     ],
