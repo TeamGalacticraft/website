@@ -20,12 +20,25 @@
 
     <sanity-blocks :blocks="data.body" :serializers="serializers" />
   </div>
+
+  <xf-modal
+    v-model="isModalOpen"
+    :max-width="1200"
+    background-colour="tertiary"
+  >
+    <gc-carousel
+      :images="selectedImages"
+      :index-override="selectedIndex"
+      :allow-modal-open="false"
+    />
+  </xf-modal>
 </template>
 
 <script lang="ts" setup>
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { SanityBlocks } from "sanity-blocks-vue-component";
 import { Serializers } from "sanity-blocks-vue-component/dist/types";
+import { XfModal } from "xf-cmpt-lib";
 
 import GcCarousel from "~/components/Carousel/GcCarousel.vue";
 
@@ -43,12 +56,25 @@ useHead({
   title: data.value.title,
 });
 
+const isModalOpen = ref<boolean>(false);
+const selectedImages = ref<any[]>([]);
+const selectedIndex = ref<number>(0);
+
+const openModal = (val: { images: any[]; index: number }): void => {
+  selectedImages.value = val.images;
+  selectedIndex.value = val.index;
+
+  isModalOpen.value = true;
+};
+
 // ** Sanity **
 const serializers: Partial<Serializers> = {
   types: {
     lineBreak: () => h("hr", { class: "line-break" }),
-    youtube: (props: any) => h("iframe", { src: props.url }),
-    gallery: (props: any) => h(GcCarousel, { images: props.images }),
+    youtube: (props: any) =>
+      h("iframe", { src: props.url, allowfullscreen: "allowfullscreen" }),
+    gallery: (props: any) =>
+      h(GcCarousel, { images: props.images, "onOpen:modal": openModal }),
   },
 };
 </script>
