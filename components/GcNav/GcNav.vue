@@ -62,6 +62,8 @@ const openLink = (route: string): void => {
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/styles/mixins";
+
 :deep(.xf-menu-modal-content) {
   border-radius: 10px;
 }
@@ -72,13 +74,13 @@ const openLink = (route: string): void => {
   font-weight: 700;
   font-size: 12px !important;
 
-  @include sm-up {
+  @include mixins.sm-up {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     font-size: 18px !important;
   }
 
-  @include sm-up {
+  @include mixins.sm-up {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
   }

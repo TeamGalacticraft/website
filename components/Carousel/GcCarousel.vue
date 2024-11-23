@@ -67,7 +67,7 @@ watch(
   (val) => {
     selectedIndex.value = val;
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 

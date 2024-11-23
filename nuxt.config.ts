@@ -6,6 +6,9 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL,
     },
   },
+  typescript: {
+    typeCheck: true,
+  },
   app: {
     head: {
       title: "Galacticraft",
@@ -46,7 +49,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/styles/variables.scss";',
+          api: "modern-compiler",
         },
       },
     },
@@ -60,16 +63,20 @@ export default defineNuxtConfig({
   build: {
     transpile: ["mixins"],
   },
+  site: {
+    url: process.env.SITE_URL,
+    name: process.env.SITE_NAME,
+  },
   modules: [
-    "nuxt-simple-sitemap",
     [
       "@nuxtjs/sanity",
       {
         projectId: process.env.SANITY_KEY,
         dataset: "production",
-        apiVersion: "2023-07-12",
+        apiVersion: "2024-11-23",
         useCdn: false,
       },
     ],
+    "@nuxtjs/sitemap",
   ],
 });

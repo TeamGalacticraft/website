@@ -47,7 +47,7 @@ const route = useRoute();
 
 const { data } = await useSanityQuery(
   '*[_type == "post" && slug.current == $slug][0]',
-  { slug: route.params.slug || "" }
+  { slug: route.params.slug || "" },
 );
 
 const { inView } = useIntersectionObserver("blog");
@@ -80,21 +80,25 @@ const serializers: Partial<Serializers> = {
 </script>
 
 <style lang="scss">
+@use "sass:map";
+@use "@/assets/styles/variables";
+@use "@/assets/styles/mixins";
+
 .blog-post {
   max-width: 350px;
   margin: 0 auto;
 
-  @include sm-up {
+  @include mixins.sm-up {
     max-width: 500px;
   }
 
-  @include md-up {
+  @include mixins.md-up {
     margin-top: 60px;
     max-width: 650px;
   }
 
   img {
-    border: 1px solid map-get($gc-colours, "tertiary");
+    border: 1px solid map.get(variables.$gc-colours, "tertiary");
     border-radius: 5px;
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -118,7 +122,7 @@ const serializers: Partial<Serializers> = {
   }
 
   a {
-    color: map-get($gc-colours, "primary");
+    color: map.get(variables.$gc-colours, "primary");
   }
 }
 </style>

@@ -19,7 +19,7 @@
             class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
             @click="
               goToDownloadPage(
-                'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy'
+                'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy',
               )
             "
           >
@@ -115,8 +115,8 @@ const { data } = await useSanityQuery('*[_type == "post"]');
 // ** Computed **
 const content = computed(() =>
   data.value.sort(
-    (a: any, b: any) => new Date(b.publishedAt) - new Date(a.publishedAt)
-  )
+    (a: any, b: any) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  ),
 );
 
 // ** Methods **
@@ -125,7 +125,7 @@ content.value.forEach((_c: any, i: number) => {
 });
 
 await useFetch("/api/modrinth").then(
-  (res) => (modrinthDownloads.value = res.data.value?.downloads || 0)
+  (res) => (modrinthDownloads.value = res.data.value?.downloads || 0),
 );
 
 await useFetch("/api/curseforge").then((res) => {
@@ -151,7 +151,7 @@ const startCountdown = (startValue: number, endValue: number, id: string) => {
     const easedPercentage: number = easeOutQuad(percentage);
 
     currentNumber = Math.floor(
-      easedPercentage * (endValue - startValue) + startValue
+      easedPercentage * (endValue - startValue) + startValue,
     );
 
     if (countingElement) {
@@ -186,12 +186,12 @@ onMounted(() => {
   startCountdown(
     modrinthDownloads.value / 2,
     modrinthDownloads.value,
-    "modrinth-downloads"
+    "modrinth-downloads",
   );
   startCountdown(
     curseDownloads.value / 2,
     curseDownloads.value,
-    "curse-downloads"
+    "curse-downloads",
   );
 
   sessionStorage.setItem("initLoad", "true");
@@ -199,6 +199,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/variables";
+@use "@/assets/styles/mixins";
+
 .header {
   height: 400px;
   width: 100%;
@@ -215,7 +219,7 @@ onMounted(() => {
     width: 120px;
     border: 1px solid #272727;
 
-    @include sm-up {
+    @include mixins.sm-up {
       width: 180px;
     }
 
@@ -223,13 +227,13 @@ onMounted(() => {
     #curse-downloads {
       animation: counting 2s linear;
 
-      @include sm-up {
+      @include mixins.sm-up {
         font-size: 16px !important;
       }
     }
   }
 
-  @include sm-up {
+  @include mixins.sm-up {
     height: 500px;
 
     img {
@@ -241,7 +245,7 @@ onMounted(() => {
     }
   }
 
-  @include md-up {
+  @include mixins.md-up {
     height: 600px;
 
     img {
@@ -249,7 +253,7 @@ onMounted(() => {
     }
   }
 
-  @include md-up {
+  @include mixins.md-up {
     height: 700px;
 
     img {
@@ -266,16 +270,16 @@ onMounted(() => {
   max-width: 350px;
   margin: 0 auto;
 
-  @include sm-up {
+  @include mixins.sm-up {
     max-width: 500px;
   }
 
-  @include md-up {
+  @include mixins.md-up {
     width: 90%;
     max-width: 1400px;
   }
 
-  @include lg-up {
+  @include mixins.lg-up {
     margin-top: 50px;
   }
 
@@ -287,7 +291,7 @@ onMounted(() => {
       object-fit: cover;
     }
 
-    @include md-up {
+    @include mixins.md-up {
       &-first {
         img {
           height: 350px;
@@ -295,7 +299,7 @@ onMounted(() => {
       }
     }
 
-    @include lg-up {
+    @include mixins.lg-up {
       &-first {
         img {
           height: 400px;
@@ -304,7 +308,7 @@ onMounted(() => {
     }
 
     img {
-      border: 1px solid map-get($gc-colours, "tertiary");
+      border: 1px solid map.get(variables.$gc-colours, "tertiary");
       border-radius: 5px;
     }
   }

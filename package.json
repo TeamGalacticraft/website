@@ -7,21 +7,26 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prettier": "prettier . --write"
   },
   "devDependencies": {
-    "nuxt": "^3.6.2",
-    "nuxt-simple-sitemap": "^2.7.0",
-    "xf-cmpt-lib": "^0.4.7"
+    "@nuxtjs/sitemap": "^6.1.5",
+    "eslint": "^9.15.0",
+    "nuxt": "3.14.0",
+    "prettier": "3.3.3",
+    "sass-loader": "^16.0.3",
+    "typescript": "5.6.3",
+    "vue-tsc": "^2.1.10",
+    "xf-cmpt-lib": "^0.7.15"
   },
   "dependencies": {
-    "@nuxtjs/sanity": "^1.7.3",
-    "@sanity/client": "^6.1.7",
-    "@types/node": "^20.4.1",
-    "dotenv": "^16.3.1",
-    "sanity-blocks-vue-component": "^1.0.1",
-    "sass": "^1.63.6",
-    "sass-loader": "^13.3.2",
-    "vue3-carousel": "^0.3.1"
+    "@nuxtjs/sanity": "^1.13.0",
+    "@portabletext/vue": "^1.0.11",
+    "@sanity/client": "^6.22.5",
+    "@types/node": "^22.9.3",
+    "dotenv": "^16.4.5",
+    "sass": "^1.81.0",
+    "vue3-carousel": "^0.7.1"
   }
 }

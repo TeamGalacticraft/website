@@ -3,5 +3,5 @@ export default cachedEventHandler(
   {
     swr: true,
     maxAge: 60 * 60, // 1 hour
-  }
+  },
 );

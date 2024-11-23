@@ -14,7 +14,7 @@ const isExtraLarge = ref<boolean>(false);
 
 const isMatchingWidth = (
   minWidth: keyof MediaQueries,
-  maxWidth?: keyof MediaQueries
+  maxWidth?: keyof MediaQueries,
 ): boolean => {
   const mediaQueries: MediaQueries = {
     sm: 500,
@@ -25,7 +25,7 @@ const isMatchingWidth = (
 
   if (maxWidth) {
     return window.matchMedia(
-      `(min-width:${mediaQueries[minWidth]}px) and (max-width:${mediaQueries[maxWidth]}px)`
+      `(min-width:${mediaQueries[minWidth]}px) and (max-width:${mediaQueries[maxWidth]}px)`,
     ).matches;
   } else {
     return window.matchMedia(`(min-width:${mediaQueries[minWidth]}px)`).matches;

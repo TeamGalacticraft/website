@@ -13,7 +13,7 @@ export const useIntersectionObserver = (elementId: string) => {
             inView.value = true;
           }
         }),
-      { rootMargin: "-50px" }
+      { rootMargin: "-50px" },
     );
 
     if (element) {
