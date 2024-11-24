@@ -18,13 +18,15 @@
       </p>
     </div>
 
-    <sanity-blocks :blocks="data.body" :serializers="serializers" />
+    <portable-text :value="data.body" :components="components" />
   </div>
 
   <xf-modal
     v-model="isModalOpen"
     :max-width="1200"
     background-colour="tertiary"
+    close-icon-colour="white"
+    :padding="2"
   >
     <gc-carousel
       :images="selectedImages"
@@ -36,47 +38,56 @@
 
 <script lang="ts" setup>
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
-import { SanityBlocks } from "sanity-blocks-vue-component";
-import { Serializers } from "sanity-blocks-vue-component/dist/types";
 import { XfModal } from "xf-cmpt-lib";
+import { PortableText } from "@portabletext/vue";
 
 import GcCarousel from "~/components/Carousel/GcCarousel.vue";
 
 // ** Data **
 const route = useRoute();
 
+const isModalOpen = ref<boolean>(false);
+const selectedImages = ref<SanityImage[]>([]);
+const selectedIndex = ref<number>(0);
+
+const { inView } = useIntersectionObserver("blog");
+
+const components = {
+  types: {
+    lineBreak: () =>
+      h("hr", {
+        class: "line-break",
+      }),
+    youtube: (props) =>
+      h("iframe", {
+        src: props.value.url,
+        allowfullscreen: "allowfullscreen",
+      }),
+    gallery: (props) =>
+      h(GcCarousel, {
+        images: props.value.images,
+        "onOpen:modal": openModal,
+      }),
+  },
+};
+
+// ** Methods **
 const { data } = await useSanityQuery(
   '*[_type == "post" && slug.current == $slug][0]',
   { slug: route.params.slug || "" },
 );
 
-const { inView } = useIntersectionObserver("blog");
-
-useHead({
-  title: data.value.title,
-});
-
-const isModalOpen = ref<boolean>(false);
-const selectedImages = ref<any[]>([]);
-const selectedIndex = ref<number>(0);
-
-const openModal = (val: { images: any[]; index: number }): void => {
-  selectedImages.value = val.images;
-  selectedIndex.value = val.index;
+const openModal = (image: SanityImages): void => {
+  selectedImages.value = image.images;
+  selectedIndex.value = image.index;
 
   isModalOpen.value = true;
 };
 
-// ** Sanity **
-const serializers: Partial<Serializers> = {
-  types: {
-    lineBreak: () => h("hr", { class: "line-break" }),
-    youtube: (props: any) =>
-      h("iframe", { src: props.url, allowfullscreen: "allowfullscreen" }),
-    gallery: (props: any) =>
-      h(GcCarousel, { images: props.images, "onOpen:modal": openModal }),
-  },
-};
+// ** Meta **
+useHead({
+  title: data.value.title,
+});
 </script>
 
 <style lang="scss">

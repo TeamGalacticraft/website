@@ -107,7 +107,7 @@ const router = useRouter();
 
 const modrinthDownloads = ref<number>(0);
 const curseDownloads = ref<number>(0);
-const itemsInView = ref<{ inView: Ref<boolean> }[]>([]);
+const itemsInView = ref<InView[]>([]);
 
 const { inView: headerInView } = useIntersectionObserver("header");
 const { data } = await useSanityQuery('*[_type == "post"]');
@@ -217,7 +217,7 @@ onMounted(() => {
     text-align: center;
     color: white;
     width: 120px;
-    border: 1px solid #272727;
+    border: 1px solid map.get(variables.$gc-colours, "tertiary");
 
     @include mixins.sm-up {
       width: 180px;

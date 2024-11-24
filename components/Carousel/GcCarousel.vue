@@ -35,7 +35,7 @@ import { XfIcon } from "xf-cmpt-lib";
 // ** Props **
 const props = defineProps({
   images: {
-    type: Array as PropType<any[]>,
+    type: Array as PropType<SanityImage[]>,
     default: () => [],
   },
   allowModalOpen: {
@@ -72,15 +72,18 @@ watch(
 </script>
 
 <style lang="scss">
+@use "sass:map";
+@use "@/assets/styles/variables";
+
 .gc-carousel {
   position: relative;
 
   &-content {
     --vc-pgn-width: 10px;
     --vc-pgn-height: 10px;
-    --vc-pgn-background-color: #b3c5ef;
+    --vc-pgn-background-color: #{map.get(variables.$gc-colours, "secondary")};
     --vc-pgn-border-radius: 50%;
-    --vc-pgn-active-color: #00a8ff;
+    --vc-pgn-active-color: #{map.get(variables.$gc-colours, "primary")};
 
     --vc-nav-color: #fff;
     --vc-nav-width: 40px;
@@ -90,7 +93,7 @@ watch(
   &-expand {
     position: absolute;
     right: 15px;
-    bottom: 40px;
+    bottom: 10px;
   }
 }
 </style>

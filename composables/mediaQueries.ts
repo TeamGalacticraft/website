@@ -1,18 +1,13 @@
-import { Ref, ref } from "vue";
+import type { MediaQueries } from "~/types/generic.types";
 
-interface MediaQueries {
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
-}
+import { ref } from "vue";
 
 const isSmall = ref<boolean>(false);
 const isMedium = ref<boolean>(false);
 const isLarge = ref<boolean>(false);
 const isExtraLarge = ref<boolean>(false);
 
-const isMatchingWidth = (
+const isMatchingScreenWidth = (
   minWidth: keyof MediaQueries,
   maxWidth?: keyof MediaQueries,
 ): boolean => {
@@ -32,17 +27,17 @@ const isMatchingWidth = (
   }
 };
 
-const setSizes = (): void => {
-  isSmall.value = isMatchingWidth("sm");
-  isMedium.value = isMatchingWidth("md");
-  isLarge.value = isMatchingWidth("lg");
-  isExtraLarge.value = isMatchingWidth("xl");
+const setMediaQuerySizes = (): void => {
+  isSmall.value = isMatchingScreenWidth("sm");
+  isMedium.value = isMatchingScreenWidth("md");
+  isLarge.value = isMatchingScreenWidth("lg");
+  isExtraLarge.value = isMatchingScreenWidth("xl");
 };
 
 const useMediaQuery = (): void => {
-  setSizes();
+  setMediaQuerySizes();
 
-  window.addEventListener("resize", setSizes);
+  window.addEventListener("resize", setMediaQuerySizes);
 };
 
 export { useMediaQuery, isSmall, isMedium, isLarge, isExtraLarge };

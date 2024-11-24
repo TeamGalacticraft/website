@@ -6,9 +6,6 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL,
     },
   },
-  typescript: {
-    typeCheck: true,
-  },
   app: {
     head: {
       title: "Galacticraft",
@@ -79,4 +76,5 @@ export default defineNuxtConfig({
     ],
     "@nuxtjs/sitemap",
   ],
+  compatibilityDate: "2024-11-24",
 });

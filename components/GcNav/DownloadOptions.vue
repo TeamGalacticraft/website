@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { XfIcon } from "xf-cmpt-lib";
 
-const downloadOptions = [
+const downloadOptions: DownloadOptions[] = [
   {
     text: "Curseforge",
     icon: "curseforge",
