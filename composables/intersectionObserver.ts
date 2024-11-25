@@ -1,6 +1,8 @@
+import type { InView } from "~/types/generic.types";
+
 import { ref, onMounted } from "vue";
 
-export const useIntersectionObserver = (elementId: string) => {
+export const useIntersectionObserver = (elementId: string): InView => {
   const inView = ref<boolean>(false);
 
   onMounted(() => {

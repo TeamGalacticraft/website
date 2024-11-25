@@ -37,6 +37,15 @@
 </template>
 
 <script lang="ts" setup>
+import type {
+  SanityBlog,
+  SanityGallery,
+  SanityImage,
+  SanityImages,
+  SanityProp,
+  SanityYoutube,
+} from "~/types/sanity.types";
+
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { XfModal } from "xf-cmpt-lib";
 import { PortableText } from "@portabletext/vue";
@@ -58,12 +67,12 @@ const components = {
       h("hr", {
         class: "line-break",
       }),
-    youtube: (props) =>
+    youtube: (props: SanityProp<SanityYoutube>) =>
       h("iframe", {
         src: props.value.url,
         allowfullscreen: "allowfullscreen",
       }),
-    gallery: (props) =>
+    gallery: (props: SanityProp<SanityGallery>) =>
       h(GcCarousel, {
         images: props.value.images,
         "onOpen:modal": openModal,
@@ -72,7 +81,7 @@ const components = {
 };
 
 // ** Methods **
-const { data } = await useSanityQuery(
+const { data } = await useSanityQuery<SanityBlog>(
   '*[_type == "post" && slug.current == $slug][0]',
   { slug: route.params.slug || "" },
 );
@@ -86,7 +95,7 @@ const openModal = (image: SanityImages): void => {
 
 // ** Meta **
 useHead({
-  title: data.value.title,
+  title: data.value?.title,
 });
 </script>
 

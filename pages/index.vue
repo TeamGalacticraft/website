@@ -2,8 +2,8 @@
   <!-- Header -->
   <div class="header">
     <xf-fuzzy-image
-      img="/img/header.png"
-      min-img="/img/header-min.png"
+      img="/img/header-w1920.webp"
+      min-img="/img/header-w250.webp"
       linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.60) 75%, #000 100%)"
       background
     />
@@ -11,7 +11,7 @@
     <div id="header" class="xf-center">
       <div class="transition" :class="{ 'transition-in-view': headerInView }">
         <div class="xf-text-center xf-mb-2">
-          <img src="/img/galactic-graphic.png" alt="" />
+          <img src="/img/graphic-w720.webp" alt="" />
         </div>
 
         <div class="xf-flex-center xf-col-gap-1">
@@ -99,6 +99,11 @@
 </template>
 
 <script lang="ts" setup>
+import type { FetchResult, InView } from "~/types/generic.types";
+import type { SanityBlog } from "~/types/sanity.types";
+import type { Modrinth } from "~/types/modrinth.types";
+import type { CurseforgeResult } from "~/types/curseforge.types";
+
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { XfIcon, XfFuzzyImage } from "xf-cmpt-lib";
 
@@ -110,12 +115,13 @@ const curseDownloads = ref<number>(0);
 const itemsInView = ref<InView[]>([]);
 
 const { inView: headerInView } = useIntersectionObserver("header");
-const { data } = await useSanityQuery('*[_type == "post"]');
+const { data } = await useSanityQuery<SanityBlog[]>('*[_type == "post"]');
 
 // ** Computed **
 const content = computed(() =>
-  data.value.sort(
-    (a: any, b: any) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  data.value!.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   ),
 );
 
@@ -124,12 +130,14 @@ content.value.forEach((_c: any, i: number) => {
   itemsInView.value[i] = useIntersectionObserver(`blog-${i}`);
 });
 
-await useFetch("/api/modrinth").then(
-  (res) => (modrinthDownloads.value = res.data.value?.downloads || 0),
-);
+await useFetch("/api/modrinth").then((res) => {
+  modrinthDownloads.value =
+    (res as FetchResult<Modrinth>).data.value?.downloads || 0;
+});
 
 await useFetch("/api/curseforge").then((res) => {
-  curseDownloads.value = res.data.value?.data.downloadCount || 0;
+  curseDownloads.value =
+    (res.data.value as CurseforgeResult).data.downloadCount || 0;
 });
 
 const startCountdown = (startValue: number, endValue: number, id: string) => {

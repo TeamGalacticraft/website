@@ -22,6 +22,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { DownloadOptions } from "~/types/generic.types";
+
 import { XfIcon } from "xf-cmpt-lib";
 
 const downloadOptions: DownloadOptions[] = [

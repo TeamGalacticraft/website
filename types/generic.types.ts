@@ -1,5 +1,5 @@
 export interface InView {
-  inView: Ref<boolean>;
+  inView: Ref<boolean, boolean>;
 }
 
 export interface MediaQueries {
@@ -14,4 +14,10 @@ export interface DownloadOptions {
   icon: string;
   route: string;
   iconSize: number;
+}
+
+export interface FetchResult<T> {
+  data: {
+    value: T;
+  };
 }
