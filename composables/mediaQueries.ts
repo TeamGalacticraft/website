@@ -1,4 +1,4 @@
-import type { MediaQueries } from "~/types/generic.types";
+import type { MediaQueries } from "@/types/generic.types";
 
 import { ref } from "vue";
 

@@ -64,7 +64,7 @@
       class="blogs-item transition xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
       :class="[
         i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4',
-        { 'transition-in-view': itemsInView[i].inView },
+        { 'transition-in-view': itemsInView[i] },
       ]"
       @click="viewBlog(blog.slug.current)"
     >
@@ -99,11 +99,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { FetchResult, InView } from "~/types/generic.types";
-import type { SanityBlog } from "~/types/sanity.types";
-import type { Modrinth } from "~/types/modrinth.types";
-import type { CurseforgeResult } from "~/types/curseforge.types";
+import type { FetchResult } from "@/types/generic.types";
+import type { SanityBlog } from "@/types/sanity.types";
+import type { Modrinth } from "@/types/modrinth.types";
+import type { CurseforgeResult } from "@/types/curseforge.types";
 
+import { startCountdown } from "@/composables/index";
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { XfIcon, XfFuzzyImage } from "xf-cmpt-lib";
 
@@ -112,7 +113,7 @@ const router = useRouter();
 
 const modrinthDownloads = ref<number>(0);
 const curseDownloads = ref<number>(0);
-const itemsInView = ref<InView[]>([]);
+const itemsInView = ref<Ref<boolean>[]>([]);
 
 const { inView: headerInView } = useIntersectionObserver("header");
 const { data } = await useSanityQuery<SanityBlog[]>('*[_type == "post"]');
@@ -127,7 +128,7 @@ const content = computed(() =>
 
 // ** Methods **
 content.value.forEach((_c: any, i: number) => {
-  itemsInView.value[i] = useIntersectionObserver(`blog-${i}`);
+  itemsInView.value[i] = useIntersectionObserver(`blog-${i}`).inView;
 });
 
 await useFetch("/api/modrinth").then((res) => {
@@ -139,47 +140,6 @@ await useFetch("/api/curseforge").then((res) => {
   curseDownloads.value =
     (res.data.value as CurseforgeResult).data.downloadCount || 0;
 });
-
-const startCountdown = (startValue: number, endValue: number, id: string) => {
-  const countingElement: HTMLElement | null = document.getElementById(id);
-  const duration: number = 2000;
-
-  let currentNumber: number = startValue;
-  let startTime: number | null = null;
-
-  const easeOutQuad = (t: number): number => t * (2 - t);
-
-  const animate = (timestamp: number): void => {
-    if (!startTime) {
-      startTime = timestamp;
-    }
-
-    const progress: number = timestamp - startTime;
-    const percentage: number = Math.min(progress / duration, 1);
-    const easedPercentage: number = easeOutQuad(percentage);
-
-    currentNumber = Math.floor(
-      easedPercentage * (endValue - startValue) + startValue,
-    );
-
-    if (countingElement) {
-      countingElement.textContent = currentNumber.toLocaleString();
-    }
-
-    if (progress < duration) {
-      // Schedule the next frame
-      requestAnimationFrame(animate);
-    }
-  };
-
-  const initLoad: string | null = sessionStorage.getItem("initLoad");
-
-  if (initLoad && countingElement) {
-    countingElement.textContent = endValue.toLocaleString();
-  } else {
-    requestAnimationFrame(animate);
-  }
-};
 
 const viewBlog = (id: string): void => {
   router.push(`/blog/${id}`);

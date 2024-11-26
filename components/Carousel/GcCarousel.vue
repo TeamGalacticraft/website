@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { SanityImage } from "~/types/sanity.types";
+import type { SanityImage } from "@/types/sanity.types";
 
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";

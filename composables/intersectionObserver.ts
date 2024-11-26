@@ -1,4 +1,4 @@
-import type { InView } from "~/types/generic.types";
+import type { InView } from "@/types/generic.types";
 
 import { ref, onMounted } from "vue";
 

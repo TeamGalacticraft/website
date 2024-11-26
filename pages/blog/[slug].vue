@@ -44,13 +44,13 @@ import type {
   SanityImages,
   SanityProp,
   SanityYoutube,
-} from "~/types/sanity.types";
+} from "@/types/sanity.types";
 
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { XfModal } from "xf-cmpt-lib";
 import { PortableText } from "@portabletext/vue";
 
-import GcCarousel from "~/components/Carousel/GcCarousel.vue";
+import GcCarousel from "@/components/Carousel/GcCarousel.vue";
 
 // ** Data **
 const route = useRoute();
