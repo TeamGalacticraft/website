@@ -1,9 +1,9 @@
 {
   "name": "galacticraft",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "vue-tsc --noEmit && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -18,7 +18,7 @@
     "sass-loader": "^16.0.3",
     "typescript": "5.6.3",
     "vue-tsc": "^2.1.10",
-    "xf-cmpt-lib": "^0.7.17"
+    "xf-cmpt-lib": "^0.7.21"
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.13.0",
