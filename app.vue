@@ -15,6 +15,6 @@ onMounted(useMediaQuery);
 </script>
 
 <style>
-@import "xf-cmpt-lib/style.css";
+@import "xf-cmpt-lib/index.css";
 @import "@/assets/styles/index.scss";
 </style>

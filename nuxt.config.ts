@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   runtimeConfig: {
     public: {
       siteUrl: process.env.SITE_URL,
@@ -16,7 +16,6 @@ export default defineNuxtConfig({
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
-          hid: "description",
           name: "description",
           content:
             "Galacticraft is all about exploring other planets, moons and asteroids! Each planet, moon and asteroid belt is a dimension in the game. The same goes for space stations.",
@@ -26,7 +25,7 @@ export default defineNuxtConfig({
           content: "black-translucent",
         },
         {
-          name: "apple-mobile-web-app-capable",
+          name: "mobile-web-app-capable",
           content: "yes",
         },
       ],
