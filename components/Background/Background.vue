@@ -35,8 +35,6 @@
   </svg>
 </template>
 
-<script lang="ts" setup></script>
-
 <style lang="scss" scoped>
 svg {
   width: 100vw;

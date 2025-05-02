@@ -25,12 +25,10 @@
         >
           <template #activator>
             <xf-button
-              style="order: 1"
               background-colour="primary"
               text-colour="black"
-            >
-              Download
-            </xf-button>
+              text="Download"
+            />
           </template>
 
           <download-options />
@@ -62,6 +60,8 @@ const openLink = (route: string): void => {
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/styles/mixins";
+
 :deep(.xf-menu-modal-content) {
   border-radius: 10px;
 }
@@ -71,14 +71,15 @@ const openLink = (route: string): void => {
   letter-spacing: 0.1em;
   font-weight: 700;
   font-size: 12px !important;
+  order: 1;
 
-  @include sm-up {
+  @include mixins.sm-up {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     font-size: 18px !important;
   }
 
-  @include sm-up {
+  @include mixins.sm-up {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
   }

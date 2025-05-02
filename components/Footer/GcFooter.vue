@@ -14,6 +14,10 @@ const currentYear: number = new Date().getFullYear();
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/mixins";
+@use "@/assets/styles/variables";
+
 .footer {
   width: 100%;
   display: flex;
@@ -21,13 +25,13 @@ const currentYear: number = new Date().getFullYear();
   p {
     font-size: 10px;
 
-    @include md-up {
+    @include mixins.md-up {
       font-size: 14px;
     }
   }
 
   a {
-    color: map-get($gc-colours, "secondary") !important;
+    color: map.get(variables.$gc-colours, "secondary") !important;
   }
 }
 </style>

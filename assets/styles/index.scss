@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "variables";
 
 body {
   background-color: black;
@@ -25,7 +25,7 @@ body {
   }
 }
 
-@each $name, $colour in $gc-colours {
+@each $name, $colour in variables.$gc-colours {
   .xf-bg-#{$name} {
     background: $colour;
   }

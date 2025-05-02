@@ -16,7 +16,6 @@ export default defineNuxtConfig({
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
-          hid: "description",
           name: "description",
           content:
             "Galacticraft is all about exploring other planets, moons and asteroids! Each planet, moon and asteroid belt is a dimension in the game. The same goes for space stations.",
@@ -26,7 +25,7 @@ export default defineNuxtConfig({
           content: "black-translucent",
         },
         {
-          name: "apple-mobile-web-app-capable",
+          name: "mobile-web-app-capable",
           content: "yes",
         },
       ],
@@ -46,30 +45,35 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/styles/variables.scss";',
+          api: "modern-compiler",
         },
       },
     },
   },
   components: [
     {
-      path: "~/components",
+      path: "@/components",
       pathPrefix: false,
     },
   ],
   build: {
     transpile: ["mixins"],
   },
+  site: {
+    url: process.env.SITE_URL,
+    name: process.env.SITE_NAME,
+  },
   modules: [
-    "nuxt-simple-sitemap",
     [
       "@nuxtjs/sanity",
       {
         projectId: process.env.SANITY_KEY,
         dataset: "production",
-        apiVersion: "2023-07-12",
+        apiVersion: "2024-11-23",
         useCdn: false,
       },
     ],
+    "@nuxtjs/sitemap",
   ],
+  compatibilityDate: "2024-11-24",
 });

@@ -1,27 +1,32 @@
 {
   "name": "galacticraft",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "vue-tsc --noEmit && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prettier": "prettier . --write"
   },
   "devDependencies": {
-    "nuxt": "^3.6.2",
-    "nuxt-simple-sitemap": "^2.7.0",
-    "xf-cmpt-lib": "^0.4.7"
+    "@nuxtjs/sitemap": "^7.2.10",
+    "eslint": "^9.25.1",
+    "nuxt": "^3.16.2",
+    "prettier": "^3.5.3",
+    "sass-loader": "^16.0.5",
+    "typescript": "5.6.3",
+    "vue-tsc": "^2.2.10",
+    "xf-cmpt-lib": "^1.0.0"
   },
   "dependencies": {
-    "@nuxtjs/sanity": "^1.7.3",
-    "@sanity/client": "^6.1.7",
-    "@types/node": "^20.4.1",
-    "dotenv": "^16.3.1",
-    "sanity-blocks-vue-component": "^1.0.1",
-    "sass": "^1.63.6",
-    "sass-loader": "^13.3.2",
-    "vue3-carousel": "^0.3.1"
+    "@nuxtjs/sanity": "^1.13.3",
+    "@portabletext/vue": "^1.0.12",
+    "@sanity/client": "^6.29.1",
+    "@types/node": "^22.15.1",
+    "dotenv": "^16.5.0",
+    "sass": "^1.87.0",
+    "vue3-carousel": "^0.15.0"
   }
 }

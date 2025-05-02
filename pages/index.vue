@@ -2,8 +2,8 @@
   <!-- Header -->
   <div class="header">
     <xf-fuzzy-image
-      img="/img/header.png"
-      min-img="/img/header-min.png"
+      img="/img/header-w1920.webp"
+      min-img="/img/header-w250.webp"
       linear-gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.60) 75%, #000 100%)"
       background
     />
@@ -11,7 +11,7 @@
     <div id="header" class="xf-center">
       <div class="transition" :class="{ 'transition-in-view': headerInView }">
         <div class="xf-text-center xf-mb-2">
-          <img src="/img/galactic-graphic.png" alt="" />
+          <img src="/img/graphic-w720.webp" alt="" />
         </div>
 
         <div class="xf-flex-center xf-col-gap-1">
@@ -19,7 +19,7 @@
             class="header-downloads xf-cursor-pointer xf-hover xf-flex-center xf-bg-black xf-py-2"
             @click="
               goToDownloadPage(
-                'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy'
+                'https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy',
               )
             "
           >
@@ -64,7 +64,7 @@
       class="blogs-item transition xf-text-colour-white xf-hover xf-cursor-pointer xf-p-4 xf-mb-8 xf-grid xf-col-12"
       :class="[
         i === 0 ? 'blogs-item-first' : 'xf-col-lg-6 xf-col-xl-4',
-        { 'transition-in-view': itemsInView[i].inView },
+        { 'transition-in-view': itemsInView[i] },
       ]"
       @click="viewBlog(blog.slug.current)"
     >
@@ -99,6 +99,12 @@
 </template>
 
 <script lang="ts" setup>
+import type { FetchResult } from "@/types/generic.types";
+import type { SanityBlog } from "@/types/sanity.types";
+import type { Modrinth } from "@/types/modrinth.types";
+import type { CurseforgeResult } from "@/types/curseforge.types";
+
+import { startCountdown } from "@/composables/index";
 import { useIntersectionObserver } from "@/composables/intersectionObserver";
 import { XfIcon, XfFuzzyImage } from "xf-cmpt-lib";
 
@@ -107,71 +113,33 @@ const router = useRouter();
 
 const modrinthDownloads = ref<number>(0);
 const curseDownloads = ref<number>(0);
-const itemsInView = ref<{ inView: Ref<boolean> }[]>([]);
+const itemsInView = ref<Ref<boolean>[]>([]);
 
 const { inView: headerInView } = useIntersectionObserver("header");
-const { data } = await useSanityQuery('*[_type == "post"]');
+const { data } = await useSanityQuery<SanityBlog[]>('*[_type == "post"]');
 
 // ** Computed **
 const content = computed(() =>
-  data.value.sort(
-    (a: any, b: any) => new Date(b.publishedAt) - new Date(a.publishedAt)
-  )
+  data.value!.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  ),
 );
 
 // ** Methods **
 content.value.forEach((_c: any, i: number) => {
-  itemsInView.value[i] = useIntersectionObserver(`blog-${i}`);
+  itemsInView.value[i] = useIntersectionObserver(`blog-${i}`).inView;
 });
 
-await useFetch("/api/modrinth").then(
-  (res) => (modrinthDownloads.value = res.data.value?.downloads || 0)
-);
+await useFetch("/api/modrinth").then((res) => {
+  modrinthDownloads.value =
+    (res as FetchResult<Modrinth>).data.value?.downloads || 0;
+});
 
 await useFetch("/api/curseforge").then((res) => {
-  curseDownloads.value = res.data.value?.data.downloadCount || 0;
+  curseDownloads.value =
+    (res.data.value as CurseforgeResult).data.downloadCount || 0;
 });
-
-const startCountdown = (startValue: number, endValue: number, id: string) => {
-  const countingElement: HTMLElement | null = document.getElementById(id);
-  const duration: number = 2000;
-
-  let currentNumber: number = startValue;
-  let startTime: number | null = null;
-
-  const easeOutQuad = (t: number): number => t * (2 - t);
-
-  const animate = (timestamp: number): void => {
-    if (!startTime) {
-      startTime = timestamp;
-    }
-
-    const progress: number = timestamp - startTime;
-    const percentage: number = Math.min(progress / duration, 1);
-    const easedPercentage: number = easeOutQuad(percentage);
-
-    currentNumber = Math.floor(
-      easedPercentage * (endValue - startValue) + startValue
-    );
-
-    if (countingElement) {
-      countingElement.textContent = currentNumber.toLocaleString();
-    }
-
-    if (progress < duration) {
-      // Schedule the next frame
-      requestAnimationFrame(animate);
-    }
-  };
-
-  const initLoad: string | null = sessionStorage.getItem("initLoad");
-
-  if (initLoad && countingElement) {
-    countingElement.textContent = endValue.toLocaleString();
-  } else {
-    requestAnimationFrame(animate);
-  }
-};
 
 const viewBlog = (id: string): void => {
   router.push(`/blog/${id}`);
@@ -186,12 +154,12 @@ onMounted(() => {
   startCountdown(
     modrinthDownloads.value / 2,
     modrinthDownloads.value,
-    "modrinth-downloads"
+    "modrinth-downloads",
   );
   startCountdown(
     curseDownloads.value / 2,
     curseDownloads.value,
-    "curse-downloads"
+    "curse-downloads",
   );
 
   sessionStorage.setItem("initLoad", "true");
@@ -199,6 +167,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/variables";
+@use "@/assets/styles/mixins";
+
 .header {
   height: 400px;
   width: 100%;
@@ -213,9 +185,9 @@ onMounted(() => {
     text-align: center;
     color: white;
     width: 120px;
-    border: 1px solid #272727;
+    border: 1px solid map.get(variables.$gc-colours, "tertiary");
 
-    @include sm-up {
+    @include mixins.sm-up {
       width: 180px;
     }
 
@@ -223,13 +195,13 @@ onMounted(() => {
     #curse-downloads {
       animation: counting 2s linear;
 
-      @include sm-up {
+      @include mixins.sm-up {
         font-size: 16px !important;
       }
     }
   }
 
-  @include sm-up {
+  @include mixins.sm-up {
     height: 500px;
 
     img {
@@ -241,7 +213,7 @@ onMounted(() => {
     }
   }
 
-  @include md-up {
+  @include mixins.md-up {
     height: 600px;
 
     img {
@@ -249,7 +221,7 @@ onMounted(() => {
     }
   }
 
-  @include md-up {
+  @include mixins.md-up {
     height: 700px;
 
     img {
@@ -266,16 +238,16 @@ onMounted(() => {
   max-width: 350px;
   margin: 0 auto;
 
-  @include sm-up {
+  @include mixins.sm-up {
     max-width: 500px;
   }
 
-  @include md-up {
+  @include mixins.md-up {
     width: 90%;
     max-width: 1400px;
   }
 
-  @include lg-up {
+  @include mixins.lg-up {
     margin-top: 50px;
   }
 
@@ -287,7 +259,7 @@ onMounted(() => {
       object-fit: cover;
     }
 
-    @include md-up {
+    @include mixins.md-up {
       &-first {
         img {
           height: 350px;
@@ -295,7 +267,7 @@ onMounted(() => {
       }
     }
 
-    @include lg-up {
+    @include mixins.lg-up {
       &-first {
         img {
           height: 400px;
@@ -304,7 +276,7 @@ onMounted(() => {
     }
 
     img {
-      border: 1px solid map-get($gc-colours, "tertiary");
+      border: 1px solid map.get(variables.$gc-colours, "tertiary");
       border-radius: 5px;
     }
   }
